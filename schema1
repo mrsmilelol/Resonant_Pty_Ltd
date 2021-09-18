@@ -1,0 +1,55 @@
+CREATE TABLE `product` (
+                           `product_name` varchar(100) NOT NULL,
+                           `product_upc` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                           `product_price` int(11) NOT NULL,
+                           `product_category` varchar(100) NOT null
+);
+
+CREATE TABLE `category` (
+    `category_name` varchar(100) NOT null PRIMARY KEY
+);
+
+ALTER TABLE `product`
+    ADD CONSTRAINT `Prod_Categ_FK` FOREIGN KEY (`product_category`) REFERENCES `category` (`category_name`);
+
+CREATE TABLE `product_image`(
+                                `product_image_filename` varchar(100) NOT NULL PRIMARY KEY,
+                                `product_upc` int(11) NOT NULL
+);
+
+ALTER TABLE `product_image`
+    ADD CONSTRAINT `Image_Prod_FK` FOREIGN KEY (`product_upc`) REFERENCES `product` (`product_upc`);
+
+CREATE TABLE `user`(
+                       `email` varchar(64) NOT NULL,
+                       `username` varchar(64) NOT NULL PRIMARY KEY,
+                       `password` varchar(64) NOT NULL
+);
+
+CREATE TABLE `client`(
+                         `client_firstname` varchar(64) NOT NULL,
+                         `client_lastname` varchar(64) NOT NULL,
+                         `client_address` varchar(64) NOT NULL,
+                         `client_phone` varchar(64) NOT NULL,
+                         `client_email` varchar(64) NOT NULL,
+                         `client_subscribed` boolean NOT NULL,
+                         `client_other_information` varchar(64) NOT NULL,
+                         PRIMARY KEY (`client_firstname`,`client_lastname`,`client_email`)
+);
+
+CREATE TABLE `photo_shoot`(
+                              `client_firstname` varchar(64) NOT NULL,
+                              `client_lastname` varchar(64) NOT NULL,
+                              `client_email` varchar(64) NOT NULL,
+                              `photo_shoot_name` varchar(64) NOT NULL PRIMARY KEY,
+                              `photo_shoot_description` varchar(64) NOT NULL,
+                              `photo_shoot_date` datetime NOT NULL PRIMARY KEY,
+                              `photo_shoot_quote` varchar(64) NOT NULL,
+                              `photo_shoot_other_information` varchar(64) NOT NULL
+);
+
+ALTER TABLE `photo_shoot`
+    ADD CONSTRAINT `Photo_Fname_FK` FOREIGN KEY (`client_firstname`) REFERENCES `client` (`client_firstname`),
+	ADD CONSTRAINT `Photo_Lname_FK` FOREIGN KEY (`client_lastname`) REFERENCES `client` (`client_lastname`),
+	ADD CONSTRAINT `Photo_Email_FK` FOREIGN KEY (`client_email`) REFERENCES `client` (`client_email`);
+
