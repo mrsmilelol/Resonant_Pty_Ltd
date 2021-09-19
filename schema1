@@ -22,29 +22,23 @@ CREATE TABLE `client`(
                          `client_lastname` varchar(64) NOT NULL,
                          `client_address` varchar(64) NOT NULL,
                          `client_phone` varchar(64) NOT NULL,
-                         `client_email` varchar(64) NOT NULL,
+                         `client_email` varchar(64) NOT NULL PRIMARY KEY,
                          `client_subscribed` boolean NOT NULL,
-                         `client_other_information` varchar(64) NOT NULL
+                         `client_other_information` varchar(64)
 );
-ALTER TABLE `client`
-    ADD CONSTRAINT `Client_PK` PRIMARY KEY (`client_firstname`,`client_lastname`,`client_email`) USING BTREE;
 
 CREATE TABLE `photo_shoot`(
-                              `client_firstname` varchar(64) NOT NULL,
-                              `client_lastname` varchar(64) NOT NULL,
                               `client_email` varchar(64) NOT NULL,
                               `photo_shoot_name` varchar(64) NOT NULL,
                               `photo_shoot_description` varchar(64) NOT NULL,
                               `photo_shoot_date` date NOT NULL,
                               `photo_shoot_quote` varchar(64) NOT NULL,
-                              `photo_shoot_other_information` varchar(64) NOT NULL
+                              `photo_shoot_other_information` varchar(64)
 );
 
 ALTER TABLE `photo_shoot`
     ADD PRIMARY KEY (`photo_shoot_name`,`photo_shoot_date`) USING BTREE;
 
 ALTER TABLE `photo_shoot`
-    ADD CONSTRAINT `Photo_Fname_FK` FOREIGN KEY (`client_firstname`) REFERENCES `client` (`client_firstname`),
-	ADD CONSTRAINT `Photo_Lname_FK` FOREIGN KEY (`client_lastname`) REFERENCES `client` (`client_lastname`),
-	ADD CONSTRAINT `Photo_Email_FK` FOREIGN KEY (`client_email`) REFERENCES `client` (`client_email`);
+    ADD CONSTRAINT `Photo_Email_FK` FOREIGN KEY (`client_email`) REFERENCES `client` (`client_email`);
 
