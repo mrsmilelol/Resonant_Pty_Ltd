@@ -1,6 +1,6 @@
 CREATE TABLE `product`(
                           `product_name` VARCHAR(100) NOT NULL,
-                          `product_upc` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                          `product_upc` INT(11) NOT NULL PRIMARY KEY,
                           `product_price` INT(11) NOT NULL,
                           `product_category` VARCHAR(100) NOT NULL
 ); CREATE TABLE `category`(
@@ -44,50 +44,51 @@ insert into `user` (`email`, `username`,`password`) values ('promaninin@edublogs
 insert into `user` (`email`, `username`,`password`) values ('kleggingo@list-manage.com', 'azimao', SHA2('azimao',256));
 
 CREATE TABLE `client`(
+                         `client_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
                          `client_firstname` varchar(64) NOT NULL,
                          `client_lastname` varchar(64) NOT NULL,
                          `client_address` varchar(64) NOT NULL,
                          `client_phone` varchar(64) NOT NULL,
-                         `client_email` varchar(64) NOT NULL PRIMARY KEY,
+                         `client_email` varchar(64) NOT NULL,
                          `client_subscribed` boolean NOT NULL,
                          `client_other_information` varchar(64)
 );
 
-INSERT INTO `client` (`client_firstname`,`client_lastname`,`client_address`,`client_phone`,`client_email`, `client_subscribed`, `client_other_information`)
+INSERT INTO `client` (`client_id`, `client_firstname`,`client_lastname`,`client_address`,`client_phone`,`client_email`, `client_subscribed`, `client_other_information`)
 VALUES
-    ("Phoebe","Fisher","P.O. Box 636, 2890 Tempus Avenue","(05) 4437 9456","velit.egestas@ipsumphasellus.com", TRUE, ""),
-    ("Cullen","Puckett","1287 Nunc St.","(08) 0416 9059","vestibulum@venenatislacusetiam.org", TRUE,""),
-    ("Seth","Vance","Ap #482-1568 Leo. Rd.","(07) 6614 7728","placerat.orci@morbi.ca", FALSE,""),
-    ("Veda","Tillman","467-7955 Cursus. St.","(08) 5734 4351","eu.odio.phasellus@at.net", TRUE,""),
-    ("Tashya","Brooks","Ap #391-2665 Suspendisse Av.","(08) 3624 3545","augue.scelerisque@diamvelarcu.org",FALSE,""),
-    ("Simon","Carter","480-2061 Nibh Street","(08) 3215 1064","donec.sollicitudin@ultricesmaurisipsum.com",FALSE,""),
-    ("Genevieve","Mann","748-2097 Nulla Rd.","(02) 1524 3656","nullam.suscipit.est@nullaeget.com",TRUE,""),
-    ("Brent","Martin","912-4635 Molestie St.","(06) 1011 5887","mauris.erat.eget@euturpis.net",FALSE,""),
-    ("Lucas","Walter","P.O. Box 168, 3318 Nisi Rd.","(07) 7720 5471","nunc.quis.arcu@acurna.org", TRUE,""),
-    ("Elvis","Haney","676-5814 Tempus, St.","(02) 3067 1476","integer.vulputate@pharetraquisqueac.edu", TRUE,""),
-    ("Caesar","Prince","258-3872 Accumsan St.","(05) 2269 1281","pellentesque@dictumsapien.co.uk",FALSE,""),
-    ("Erich","York","176-7103 Hendrerit Street","(03) 9303 1808","primis.in@dui.ca", TRUE,""),
-    ("Urielle","Holmes","867-5059 Faucibus St.","(08) 2757 5594","montes.nascetur@nullamagna.co.uk",FALSE,""),
-    ("Kamal","Carney","Ap #783-4988 Fusce Av.","(02) 9952 4264","et.ultrices.posuere@mauris.co.uk", TRUE,""),
-    ("Sandra","Davis","8227 Nunc, Avenue","(02) 5237 1386","dolor.quisque@miduis.org", TRUE,""),
-    ("Megan","Golden","Ap #132-139 Sem Street","(09) 6803 1820","ultrices@dolortempus.ca", TRUE,""),
-    ("Owen","Hopkins","Ap #471-9190 Mauris Street","(05) 5215 8113","id.nunc@integeraliquam.org",FALSE,""),
-    ("Audrey","Charles","921-3502 Sodales Avenue","(03) 4479 7940","odio@et.net", TRUE,""),
-    ("Chandler","Stone","Ap #287-9036 Sociosqu St.","(03) 1144 5733","luctus.et@gravida.co.uk", TRUE,""),
-    ("Ishmael","Vazquez","Ap #117-9863 Proin St.","(06) 1842 6432","tellus.aenean@quisquevarius.com", TRUE,""),
-    ("Laurel","Salazar","142-8268 Ante St.","(07) 1687 2429","eu.tempor.erat@suscipitnonummyfusce.org",FALSE,""),
-    ("Levi","Strickland","123-7970 Ligula Ave","(09) 2383 0681","maecenas.libero@nunclectuspede.edu",FALSE,""),
-    ("Laith","White","588-2672 Donec Av.","(01) 6767 9053","faucibus.ut@magna.ca", TRUE,""),
-    ("Claire","Lott","560-5663 Metus Rd.","(02) 2325 5584","sem.molestie@donecconsectetuermauris.com",FALSE,""),
-    ("Raya","Maynard","460-6788 Arcu. St.","(06) 1484 4280","dapibus.rutrum@egestasligula.edu", TRUE,""),
-    ("Miriam","Dean","Ap #213-7500 Proin St.","(04) 6575 7494","massa.rutrum.magna@condimentumdonecat.org", TRUE,""),
-    ("Gil","Gay","Ap #543-165 Aliquam St.","(02) 4611 0511","amet.luctus.vulputate@maurisa.com", TRUE,""),
-    ("Emi","Dickson","171-6746 Ligula. Street","(01) 6774 5257","ipsum.primis.in@mattisvelit.net", TRUE,""),
-    ("Alvin","Fuller","3134 Vulputate, Street","(02) 5217 8423","non.lobortis@ornaresagittis.ca", TRUE,""),
-    ("Bethany","Baker","485-3057 Dictum St.","(05) 3758 8932","est.mollis.non@nuncsit.org", TRUE,"");
+    (1,"Phoebe","Fisher","P.O. Box 636, 2890 Tempus Avenue","(05) 4437 9456","velit.egestas@ipsumphasellus.com", TRUE, ""),
+    (2,"Cullen","Puckett","1287 Nunc St.","(08) 0416 9059","vestibulum@venenatislacusetiam.org", TRUE,""),
+    (3,"Seth","Vance","Ap #482-1568 Leo. Rd.","(07) 6614 7728","placerat.orci@morbi.ca", FALSE,""),
+    (4,"Veda","Tillman","467-7955 Cursus. St.","(08) 5734 4351","eu.odio.phasellus@at.net", TRUE,""),
+    (5,"Tashya","Brooks","Ap #391-2665 Suspendisse Av.","(08) 3624 3545","augue.scelerisque@diamvelarcu.org",FALSE,""),
+    (6,"Simon","Carter","480-2061 Nibh Street","(08) 3215 1064","donec.sollicitudin@ultricesmaurisipsum.com",FALSE,""),
+    (7,"Genevieve","Mann","748-2097 Nulla Rd.","(02) 1524 3656","nullam.suscipit.est@nullaeget.com",TRUE,""),
+    (8,"Brent","Martin","912-4635 Molestie St.","(06) 1011 5887","mauris.erat.eget@euturpis.net",FALSE,""),
+    (9,"Lucas","Walter","P.O. Box 168, 3318 Nisi Rd.","(07) 7720 5471","nunc.quis.arcu@acurna.org", TRUE,""),
+    (10,"Elvis","Haney","676-5814 Tempus, St.","(02) 3067 1476","integer.vulputate@pharetraquisqueac.edu", TRUE,""),
+    (11,"Caesar","Prince","258-3872 Accumsan St.","(05) 2269 1281","pellentesque@dictumsapien.co.uk",FALSE,""),
+    (12,"Erich","York","176-7103 Hendrerit Street","(03) 9303 1808","primis.in@dui.ca", TRUE,""),
+    (13,"Urielle","Holmes","867-5059 Faucibus St.","(08) 2757 5594","montes.nascetur@nullamagna.co.uk",FALSE,""),
+    (14,"Kamal","Carney","Ap #783-4988 Fusce Av.","(02) 9952 4264","et.ultrices.posuere@mauris.co.uk", TRUE,""),
+    (15,"Sandra","Davis","8227 Nunc, Avenue","(02) 5237 1386","dolor.quisque@miduis.org", TRUE,""),
+    (16,"Megan","Golden","Ap #132-139 Sem Street","(09) 6803 1820","ultrices@dolortempus.ca", TRUE,""),
+    (17,"Owen","Hopkins","Ap #471-9190 Mauris Street","(05) 5215 8113","id.nunc@integeraliquam.org",FALSE,""),
+    (18,"Audrey","Charles","921-3502 Sodales Avenue","(03) 4479 7940","odio@et.net", TRUE,""),
+    (19,"Chandler","Stone","Ap #287-9036 Sociosqu St.","(03) 1144 5733","luctus.et@gravida.co.uk", TRUE,""),
+    (20,"Ishmael","Vazquez","Ap #117-9863 Proin St.","(06) 1842 6432","tellus.aenean@quisquevarius.com", TRUE,""),
+    (21,"Laurel","Salazar","142-8268 Ante St.","(07) 1687 2429","eu.tempor.erat@suscipitnonummyfusce.org",FALSE,""),
+    (22,"Levi","Strickland","123-7970 Ligula Ave","(09) 2383 0681","maecenas.libero@nunclectuspede.edu",FALSE,""),
+    (23,"Laith","White","588-2672 Donec Av.","(01) 6767 9053","faucibus.ut@magna.ca", TRUE,""),
+    (24,"Claire","Lott","560-5663 Metus Rd.","(02) 2325 5584","sem.molestie@donecconsectetuermauris.com",FALSE,""),
+    (25,"Raya","Maynard","460-6788 Arcu. St.","(06) 1484 4280","dapibus.rutrum@egestasligula.edu", TRUE,""),
+    (26,"Miriam","Dean","Ap #213-7500 Proin St.","(04) 6575 7494","massa.rutrum.magna@condimentumdonecat.org", TRUE,""),
+    (27,"Gil","Gay","Ap #543-165 Aliquam St.","(02) 4611 0511","amet.luctus.vulputate@maurisa.com", TRUE,""),
+    (28,"Emi","Dickson","171-6746 Ligula. Street","(01) 6774 5257","ipsum.primis.in@mattisvelit.net", TRUE,""),
+    (29,"Alvin","Fuller","3134 Vulputate, Street","(02) 5217 8423","non.lobortis@ornaresagittis.ca", TRUE,""),
+    (30,"Bethany","Baker","485-3057 Dictum St.","(05) 3758 8932","est.mollis.non@nuncsit.org", TRUE,"");
 
 CREATE TABLE `photo_shoot`(
-                              `client_email` varchar(64) NOT NULL,
+                              `client_id` INT(11) NOT NULL,
                               `photo_shoot_name` varchar(64) NOT NULL,
                               `photo_shoot_description` varchar(64) NOT NULL,
                               `photo_shoot_date` date NOT NULL,
@@ -99,6 +100,6 @@ ALTER TABLE `photo_shoot`
     ADD PRIMARY KEY (`photo_shoot_name`,`photo_shoot_date`) USING BTREE;
 
 ALTER TABLE `photo_shoot`
-    ADD CONSTRAINT `Photo_Email_FK` FOREIGN KEY (`client_email`) REFERENCES `client` (`client_email`);
+    ADD CONSTRAINT `Photo_id_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
 
 
