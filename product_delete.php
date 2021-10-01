@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
             <form method="post">
                 <label for="name">Product Name</label>
                 <input type="text" id="name" value="<?= $row->product_name ?>" disabled/><br>
-                <label for="upc">Unit Price</label>
+                <label for="upc">Universal Product Code</label>
                 <input type="number" id="upc" value="<?= $row->product_upc ?>" disabled/><br>
                 <label for="price">Selling Price</label>
                 <input type="number" id="price" value="<?= $row->product_price ?>" disabled/><br>

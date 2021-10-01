@@ -19,7 +19,7 @@ if ($stmt->execute()): ?>
         <thead>
         <tr>
             <th>Product Name</th>
-            <th>Product Unit Price</th>
+            <th>Product Universal Product Code</th>
             <th>Product Price</th>
             <th>Product Category</th>
             <th>Action</th>>
