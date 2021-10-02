@@ -103,3 +103,6 @@ ALTER TABLE `photo_shoot`
     ADD CONSTRAINT `Photo_id_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
 
 
+INSERT INTO `category` (`category_name`) VALUES ("Portrait"),("Fashion"),("Sports"),("Editorial"),("Architectural"),
+("Black and White"),("Advertising"),("Still Life"),("Street"),("Adventure"),("Astrophotography"),("Business"),("Candid")
+,("City Scape"),("Commercial"),("Creative"),("Documentary"),("Drone");
