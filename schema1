@@ -12,36 +12,36 @@ CREATE TABLE `product_image`(
                                 `product_upc` INT(11) NOT NULL
 ); ALTER TABLE
     `product_image` ADD CONSTRAINT `Image_Prod_FK` FOREIGN KEY(`product_upc`) REFERENCES `product`(`product_upc`);
-CREATE TABLE `user`(
-                       `email` VARCHAR(64) NOT NULL,
-                       `username` VARCHAR(64) NOT NULL PRIMARY KEY,
-                       `password` VARCHAR(64) NOT NULL
+CREATE TABLE `user`(`id` INT(11) NOT NULL PRIMARY KEY,
+                    `email` VARCHAR(64) NOT NULL,
+                    `username` VARCHAR(64) NOT NULL,
+                    `password` VARCHAR(64) NOT NULL
 );
-insert into `user` (`email`, `username`,`password`) values ('dosuaird0@wordpress.org', 'scheng0', SHA2('scheng0',256));
-insert into `user` (`email`, `username`,`password`) values ('asollam1@digg.com', 'wwormell1', SHA2('wwormell1',256));
-insert into `user` (`email`, `username`,`password`) values ('cfowlie2@intel.com', 'rconcklin2', SHA2('rconcklin2',256));
-insert into `user` (`email`, `username`,`password`) values ('lesp3@e-recht24.de', 'elockton3', SHA2('elockton3',256));
-insert into `user` (`email`, `username`,`password`) values ('apahlsson4@salon.com', 'pcroizier4', SHA2('pcroizier4',256));
-insert into `user` (`email`, `username`,`password`) values ('tkliner5@aboutads.info', 'npetticrow5', SHA2('npetticrow5',256));
-insert into `user` (`email`, `username`,`password`) values ('dpresho6@xrea.com', 'lbarnbrook6', SHA2('lbarnbrook6',256));
-insert into `user` (`email`, `username`,`password`) values ('bmacvain7@mapy.cz', 'vraysdale7', SHA2('vraysdale7',256));
-insert into `user` (`email`, `username`,`password`) values ('dsmowton8@opera.com', 'cyouthed8', SHA2('cyouthed8',256));
-insert into `user` (`email`, `username`,`password`) values ('sgiottoi9@tmall.com', 'jlangtree9', SHA2('jlangtree9',256));
-insert into `user` (`email`, `username`,`password`) values ('cthornleya@usda.gov', 'gcurea', SHA2('gcurea',256));
-insert into `user` (`email`, `username`,`password`) values ('hruburyb@eventbrite.com', 'wcharlsonb', SHA2('wcharlsonb',256));
-insert into `user` (`email`, `username`,`password`) values ('jinkpenc@simplemachines.org', 'cdigbyc', SHA2('cdigbyc',256));
-insert into `user` (`email`, `username`,`password`) values ('mdurband@bravesites.com', 'dholsond', SHA2('dholsond',256));
-insert into `user` (`email`, `username`,`password`) values ('ccraine@seesaa.net', 'lfarryanne', SHA2('lfarryanne',256));
-insert into `user` (`email`, `username`,`password`) values ('vchartersf@unesco.org', 'rchettlef', SHA2('rchettlef',256));
-insert into `user` (`email`, `username`,`password`) values ('sclappisong@lulu.com', 'cdallicoatg', SHA2('cdallicoatg',256));
-insert into `user` (`email`, `username`,`password`) values ('aourryh@dyndns.org', 'bgoldesh', SHA2('bgoldesh',256));
-insert into `user` (`email`, `username`,`password`) values ('rhusheri@drupal.org', 'rkiledali', SHA2('rkiledali',256));
-insert into `user` (`email`, `username`,`password`) values ('ehardij@sina.com.cn', 'gboristonj', SHA2('gboristonj',256));
-insert into `user` (`email`, `username`,`password`) values ('kkirragek@indiatimes.com', 'jbarbrookk', SHA2('jbarbrookk',256));
-insert into `user` (`email`, `username`,`password`) values ('thuardl@latimes.com', 'bmackailel', SHA2('bmackailel',256));
-insert into `user` (`email`, `username`,`password`) values ('mboutwellm@arizona.edu', 'fcurcherm', SHA2('fcurcherm',256));
-insert into `user` (`email`, `username`,`password`) values ('promaninin@edublogs.org', 'jgriern', SHA2('jgriern',256));
-insert into `user` (`email`, `username`,`password`) values ('kleggingo@list-manage.com', 'azimao', SHA2('azimao',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (1,'dosuaird0@wordpress.org', 'scheng0', SHA2('scheng0',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (2,'asollam1@digg.com', 'wwormell1', SHA2('wwormell1',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (3,'cfowlie2@intel.com', 'rconcklin2', SHA2('rconcklin2',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (4,'lesp3@e-recht24.de', 'elockton3', SHA2('elockton3',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (5,'apahlsson4@salon.com', 'pcroizier4', SHA2('pcroizier4',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (6,'tkliner5@aboutads.info', 'npetticrow5', SHA2('npetticrow5',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (7,'dpresho6@xrea.com', 'lbarnbrook6', SHA2('lbarnbrook6',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (8,'bmacvain7@mapy.cz', 'vraysdale7', SHA2('vraysdale7',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (9,'dsmowton8@opera.com', 'cyouthed8', SHA2('cyouthed8',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (10,'sgiottoi9@tmall.com', 'jlangtree9', SHA2('jlangtree9',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (11,'cthornleya@usda.gov', 'gcurea', SHA2('gcurea',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (12,'hruburyb@eventbrite.com', 'wcharlsonb', SHA2('wcharlsonb',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (13,'jinkpenc@simplemachines.org', 'cdigbyc', SHA2('cdigbyc',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (14,'mdurband@bravesites.com', 'dholsond', SHA2('dholsond',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (15,'ccraine@seesaa.net', 'lfarryanne', SHA2('lfarryanne',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (16,'vchartersf@unesco.org', 'rchettlef', SHA2('rchettlef',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (17,'sclappisong@lulu.com', 'cdallicoatg', SHA2('cdallicoatg',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (18,'aourryh@dyndns.org', 'bgoldesh', SHA2('bgoldesh',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (19,'rhusheri@drupal.org', 'rkiledali', SHA2('rkiledali',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (20,'ehardij@sina.com.cn', 'gboristonj', SHA2('gboristonj',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (21,'kkirragek@indiatimes.com', 'jbarbrookk', SHA2('jbarbrookk',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (22,'thuardl@latimes.com', 'bmackailel', SHA2('bmackailel',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (23,'mboutwellm@arizona.edu', 'fcurcherm', SHA2('fcurcherm',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (24,'promaninin@edublogs.org', 'jgriern', SHA2('jgriern',256));
+insert into `user` (`id`,`email`, `username`,`password`) values (25,'kleggingo@list-manage.com', 'azimao', SHA2('azimao',256));
 
 CREATE TABLE `client`(
                          `client_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -101,8 +101,3 @@ ALTER TABLE `photo_shoot`
 
 ALTER TABLE `photo_shoot`
     ADD CONSTRAINT `Photo_id_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
-
-
-INSERT INTO `category` (`category_name`) VALUES ("Portrait"),("Fashion"),("Sports"),("Editorial"),("Architectural"),
-("Black and White"),("Advertising"),("Still Life"),("Street"),("Adventure"),("Astrophotography"),("Business"),("Candid")
-,("City Scape"),("Commercial"),("Creative"),("Documentary"),("Drone");
