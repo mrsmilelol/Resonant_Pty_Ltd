@@ -1,10 +1,11 @@
 CREATE TABLE `product`(
                           `product_name` VARCHAR(100) NOT NULL,
-                          `product_upc` INT(11) NOT NULL PRIMARY KEY,
+                          `product_upc` INT(12) NOT NULL PRIMARY KEY,
                           `product_price` INT(11) NOT NULL,
                           `product_category` VARCHAR(100) NOT NULL
 ); CREATE TABLE `category`(
-    `category_name` VARCHAR(100) NOT NULL PRIMARY KEY
+    `category_id INT(11) NOT NULL PRIMARY KEY,
+    `category_name` VARCHAR(100) NOT NULL
    ); ALTER TABLE
     `product` ADD CONSTRAINT `Prod_Categ_FK` FOREIGN KEY(`product_category`) REFERENCES `category`(`category_name`);
 CREATE TABLE `product_image`(
@@ -101,3 +102,8 @@ ALTER TABLE `photo_shoot`
 
 ALTER TABLE `photo_shoot`
     ADD CONSTRAINT `Photo_id_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
+
+INSERT INTO `category` (`category_id`,`category_name`) VALUES (1,"Portrait"),(2,"Fashion"),(3,"Sports"),(4,"Editorial"),
+(5,"Architectural"),(6,"Black and White"),(7,"Advertising"),(8,"Still Life"),(9,"Street"),(10,"Adventure"),
+(11,"Astrophotography"),(12,"Business"),(13,"Candid"),(14,"City Scape"),(15,"Commercial"),(16,"Creative"),
+(17,"Documentary"),(18,"Drone");
