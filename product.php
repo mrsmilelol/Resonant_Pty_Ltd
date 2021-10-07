@@ -3,22 +3,29 @@
     <title>Product Information</title>
 </head>
 <body>
-<form action="product_search.php" method="get">
+<form action="" method="post">
     <input type="text" name="search" placeholder="Search for products..."/>
-    <input type="submit" value="Submit" />
+    <input type="submit" name = "submit" value="Submit" />
 </form>
 <h1>Product Information</h1>
 <button onclick="window.location='product_insert.php'">Add new product information</button>
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
-$query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id = category.category_id ORDER BY category_name;";
+$query="";
+if(isset($_POST['submit'])){
+    $search = $_POST['search'];
+    $query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id = category.category_id WHERE product_upc LIKE '%".$search."%' ORDER BY category_name;";
+}
+else{
+    $query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id = category.category_id ORDER BY category_name;";
+}
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>
     <table border="1">
         <thead>
         <tr>
-            <th>Product Name</th>
             <th>Product Universal Product Code</th>
+            <th>Product Name</th>
             <th>Product Price</th>
             <th>Product Category</th>
             <th>Action</th>
