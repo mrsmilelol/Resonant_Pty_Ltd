@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <form method="post" enctype="multipart/form-data">
     <div class="aligned-form">
         <div class="row">
-            <label for="product_upc">ID</label>
+            <label for="product_upc">UPC</label>
             <input type="number" id="product_upc" name="product_upc" />
         </div>
         <div class="row">
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
             <div class="row center">
                 <input type="submit" value="Add"/>
-                <button type="button" onclick="window.location='client.php';return false;">Cancel</button>
+                <button type="button" onclick="window.location='product.php';return false;">Cancel</button>
             </div>
 </form>
 <?php ?>
