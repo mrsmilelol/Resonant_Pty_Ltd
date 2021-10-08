@@ -46,7 +46,7 @@ if (!empty($_POST)) {
                 </div>
                 <div class="row center">
                     <input type="submit" value="Update"/>
-                    <button type="button" onclick="window.location='client.php';return false;">Cancel</button>
+                    <button type="button" onclick="window.location='category.php';return false;">Cancel</button>
                 </div>
             </form>
         <?php } else {
