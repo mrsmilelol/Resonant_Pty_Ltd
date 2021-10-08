@@ -10,8 +10,8 @@ CREATE TABLE `category`(
 );
    ALTER TABLE
     `product` ADD CONSTRAINT `Prod_Categ_FK` FOREIGN KEY(`category_id`) REFERENCES `category`(`category_id`);
-CREATE TABLE `product_image`(
-                                `product_image_filename` VARCHAR(100) NOT NULL PRIMARY KEY,
+CREATE TABLE `product_image`(`product_image_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+                                `product_image_filename` VARCHAR(100) NOT NULL,
                                 `product_upc` INT(11) NOT NULL
 ); ALTER TABLE
     `product_image` ADD CONSTRAINT `Image_Prod_FK` FOREIGN KEY(`product_upc`) REFERENCES `product`(`product_upc`);
