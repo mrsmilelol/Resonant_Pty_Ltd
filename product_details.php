@@ -36,7 +36,7 @@ if (isset($_GET['product_upc'])) {
 <form method="post">
     <div class="aligned-form">
         <div class="row">
-            <label for="product_upc">ID</label>
+            <label for="product_upc">UPC</label>
             <input type="number" readonly id="product_upc" name="product_upc" value="<?= $product->product_upc ?>">
         </div>
         <div class="row">
