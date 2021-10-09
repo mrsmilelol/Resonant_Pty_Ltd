@@ -8,7 +8,6 @@
     <input type="submit" name = "submit" value="Submit" />
 </form>
 <h1>Product Information</h1>
-<button onclick="window.location='product_insert.php'">Add new product information</button>
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 $query="";
@@ -21,9 +20,13 @@ else{
 }
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>
+<button onclick="window.location='product_insert.php'">Add new product information</button>
+<form method="post" action="product_delete.php" id="product_delete">
+    <input type="submit" value="Delete Selected Products"/>
     <table border="1">
         <thead>
         <tr>
+            <th>Delete?</th>
             <th>Product Universal Product Code</th>
             <th>Product Name</th>
             <th>Product Price</th>
@@ -33,18 +36,22 @@ if ($stmt->execute()): ?>
         </thead>
         <tbody>
         <?php while ($row = $stmt->fetchObject()): ?>
+            <td class="table-cell-center">
+                <input type="checkbox" name="product_ids[]" value="<?php echo $row->product_upc; ?>"/>
+            </td>
             <td><?= $row->product_upc ?></td>
             <td><?= $row->product_name ?></td>
             <td><?= $row->product_price ?></td>
             <td><?= $row->category_name ?></td>
-            <td><button id="update" onclick="window.location='product_update.php?product_upc=<?= $row->product_upc?>'">Update</button>
-                <button id="delete" onclick="window.location='product_delete.php?product_upc=<?= $row->product_upc?>'">Delete</button></td>
+            <td><button id="details" onclick="window.location='product_details.php?product_upc=<?= $row->product_upc?>'">Details</button>
+                <button id="update" onclick="window.location='product_update.php?product_upc=<?= $row->product_upc?>'">Update</button>
+                <button type="submit" name="product_ids[]" onclick="location.reload()" value="<?= $row->product_upc?>">Delete</button></td>
             </tr>
         <?php endwhile; ?>
         </tbody>
     </table>
-<?php else:
-    die(friendlyError($stmt->errorInfo()[2]));
-endif; ?>
+    <?php else:
+        die(friendlyError($stmt->errorInfo()[2]));
+    endif; ?>
 </body>
 </html>
