@@ -39,7 +39,8 @@ if ($stmt->execute()): ?>
                 <td><?= $row->client_subscribed ?></td>
                 <td><?= $row->client_other_information ?></td>
                 <td><button id="update" class="btn btn-info btn-sm" onclick="window.location='client_update.php?client_id=<?= $row->client_id?>'">Update</button>
-                    <button id="delete" class="btn btn-danger btn-sm" onclick="window.location='client_delete.php?client_id=<?= $row->client_id?>'">Delete</button></td>
+                    <button id="delete" class="btn btn-danger btn-sm" onclick="window.location='client_delete.php?client_id=<?= $row->client_id?>'">Delete</button>
+                    <button id="download" class="btn btn-success btn-sm" onclick="window.location='client_pdf.php?client_id=<?= $row->client_id?>'">Download</button></td>
             </tr>
         <?php endwhile; ?>
         </tbody>
@@ -48,3 +49,4 @@ if ($stmt->execute()): ?>
     die(friendlyError($stmt->errorInfo()[2]));
 endif; ?>
 <?php require("footer.php")?>
+</body>
