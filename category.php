@@ -1,22 +1,18 @@
-
-<!doctype html>
-<head>
-    <title>Category Information</title>
-</head>
+<?php
+$PAGE_ID = "category";
+require("header.php")
+?>
+<title>Category Information</title>
 <body>
-<h1>Category Information</h1>
-<div class="center row">
-    <button onclick="window.location='category_insert.php'">Add new category information</button>
-</div>
+<h1 class="text-center">Category Information</h1>
+<button class="btn btn-outline-primary mx-sm-2" onclick="window.location='category_insert.php'">Add new category information</button>
 <?php
 /** @var $dbh PDO */
-#$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
-
-include("connection.php");
+$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 $query = "SELECT * FROM `category`;";
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>
-    <table border="1">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>Category ID</th>
@@ -31,8 +27,8 @@ if ($stmt->execute()): ?>
                 </td>
                 <td><?= $row->category_id ?></td>
                 <td><?= $row->category_name ?></td>
-                <td><button id="update" onclick="window.location='category_update.php?category_id=<?= $row->category_id?>'">Update</button>
-                    <button id="delete" onclick="window.location='category_delete.php?category_id=<?= $row->category_id?>'">Delete</button></td>
+                <td style="width: 10%"><button id="update" class="btn btn-info btn-sm" onclick="window.location='category_update.php?category_id=<?= $row->category_id?>'">Update</button>
+                    <button id="delete" class="btn btn-danger btn-sm" onclick="window.location='category_delete.php?category_id=<?= $row->category_id?>'">Delete</button></td>
             </tr>
         <?php endwhile; ?>
         </tbody>
@@ -42,4 +38,4 @@ if ($stmt->execute()): ?>
 endif; ?>
 </body>
 </html>
-<?php
+<?php require("footer.php")?>

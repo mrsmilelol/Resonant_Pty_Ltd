@@ -2,15 +2,12 @@
 ob_start();
 /** @var $dbh PDO */
 /** @var $db_name string */
-include("connection.php");
+$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
+require("header.php");
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Add new photo shoot</title>
-</head>
+<title>Add new photo shoot</title>
 <body>
-<h1>Add new photo shoot</h1>
+<h3 class="mx-sm-3">Add new photo shoot</h3>
 <?php
 if(!empty($_POST)){
     $query = "INSERT INTO photo_shoot (client_id, photo_shoot_name, photo_shoot_description,`photo_shoot_date`,`photo_shoot_quote`, photo_shoot_other_information) VALUES (?, ?, ?, ?, ?, ?)";
@@ -23,47 +20,10 @@ if(!empty($_POST)){
         $_POST['photo_shoot_quote'],
         $_POST['photo_shoot_other_information']];
     if ($stmt->execute($parameters)) {
-        $query = "SELECT * FROM photo_shoot INNER JOIN client ON photo_shoot.client_id = client.client_id WHERE `client_id`=? ORDER BY client_firstname, client_lastname";
-        $stmt = $dbh->prepare($query);
-        if ($stmt->rowCount() > 0) {
-            $record = $stmt->fetchObject(); ?>
-            <div class="center row">New photo shoot has been added.</div>
-            <form method="post">
-                <div class="aligned-form">
-                    <div class="row">
-                        <label for="id">ID</label>
-                        <input type="number" id="id" value="<?= $record->client_id ?>" disabled/>
-                    </div>
-                    <div class="row">
-                        <label for="photo_shoot_name">Name</label>
-                        <input type="text" id="photo_shoot_name" value="<?= $record->photo_shoot_name ?>" disabled/>
-                    </div>
-                    <div class="row">
-                        <label for="photo_shoot_description">Description</label>
-                        <input type="text" id="photo_shoot_description" value="<?= $record->photo_shoot_description ?>" disabled/>
-                    </div>
-                    <div class="row">
-                        <label for="photo_shoot_date">Date</label>
-                        <input type="date" id="photo_shoot_date" value="<?= $record->photo_shoot_date ?>" disabled/>
-                    </div>
-                    <div class="row">
-                        <label for="photo_shoot_quote">Quote</label>
-                        <input type="text" id="photo_shoot_quote" value="<?= $record->photo_shoot_quote ?>" disabled/>
-                    </div>
-                    <div class="row">
-                        <label for="photo_shoot_other_information">Other Information</label>
-                        <input type="text" id="photo_shoot_other_information" value="<?= $record->photo_shoot_other_information ?>" disabled/>
-                    </div>
-                </div>
-            </form>
-            <div class="center row">
-                <button onclick="window.location='photoshoot.php'">Back to the photos-hoot list</button>
-            </div>
-        <?php } else {
-            echo " New photo-shoot is successfully added ";
-            echo "<div class=\"center row\"><button onclick=\"window.location='photoshoot.php'\">Back to the photo-shoot list</button></div>";
-        }
-    } else {
+        echo "<span class=\"mx-sm-3\"> New photo-shoot is successfully added</span> ";
+        echo "<div class=\"row\"><button  class=\"btn btn-outline-info w-25 mx-sm-4 mb-2\"  onclick=\"window.location='photoshoot.php'\">Back to the photo-shoot list</button></div>";
+    }
+    else {
         die(friendlyError($stmt->errorInfo()[2]));
     }
 }
@@ -76,39 +36,39 @@ else {
         <div class="row">
             <?php $client_stmt = $dbh->prepare("SELECT * FROM `client` ORDER BY `client_id`");
             if ($client_stmt->execute() && $client_stmt->rowCount() > 0) { ?>
-                <label for="client_id">Client</label>
-                <select name="client_id" id="client_id">
+                <label for="client_id" class="mx-sm-3">Client</label>
+                <select name="client_id" id="client_id" class="form-control-sm mx-sm-4 mb-2 w-25">
                     <?php while ($row = $client_stmt->fetchObject()): ?>
                         <option value="<?= $row->client_id ?>"><?= $row->client_firstname?><pre>  </pre> <?= $row->client_lastname ?></option>
                     <?php endwhile; ?>
                 </select>
-            <?php } ?>">
+            <?php } ?>
         </div>
         <div class="row">
-            <label for="photo_shoot_name">Name</label>
-            <input type="text" id="photo_shoot_name" name="photo_shoot_name"/>
+            <label for="photo_shoot_name" class="mx-sm-3">Name</label>
+            <input type="text" id="photo_shoot_name" class="form-control-sm mx-sm-4 mb-2 w-25" name="photo_shoot_name" required/>
         </div>
         <div class="row">
-            <label for="photo_shoot_description">Description</label>
-            <input type="text" id="photo_shoot_description" name="photo_shoot_description" />
+            <label for="photo_shoot_description" class="mx-sm-3">Description</label>
+            <input type="text" id="photo_shoot_description" class="form-control-sm mx-sm-4 mb-2 w-25" name="photo_shoot_description" required/>
         </div>
         <div class="row">
-            <label for="photo_shoot_date">Date</label>
-            <input type="date" id="photo_shoot_date" name="photo_shoot_date" />
+            <label for="photo_shoot_date" class="mx-sm-3">Date</label>
+            <input type="date" id="photo_shoot_date" class="form-control-sm mx-sm-4 mb-2 w-25" name="photo_shoot_date" required/>
         </div>
         <div class="row">
-            <label for="photo_shoot_quote">Quote</label>
-            <input type="text" id="photo_shoot_quote" name="photo_shoot_quote" ?>"/>
+            <label for="photo_shoot_quote" class="mx-sm-3">Quote</label>
+            <input type="text" id="photo_shoot_quote" class="form-control-sm mx-sm-4 mb-2 w-25" name="photo_shoot_quote" required/>
         </div>
         <div class="row">
-            <label for="photo_shoot_other_information">Other Information</label>
-            <input type="text" id="photo_shoot_other_information" name="photo_shoot_other_information" />
+            <label for="photo_shoot_other_information" class="mx-sm-3">Other Information</label>
+            <textarea type="text" id="photo_shoot_other_information" class="form-control-sm mx-sm-4 mb-2 w-25" rows="5" name="photo_shoot_other_information"></textarea>
         </div>
-        <div class="row center">
-            <input type="submit" value="Add"/>
-            <button type="button" onclick="window.location='photoshoot.php';return false;">Cancel</button>
+        <div class="row">
+            <input type="submit" class="btn btn-outline-success w-25 mx-sm-4 mb-2" value="Add"/>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-danger w-25 mx-sm-4 mb-2" onclick="window.location='photoshoot.php';return false;">Cancel</button>
         </div>
     </form>
-<?php }?>
-</body>
-</html>
+<?php require("footer.php");}?>

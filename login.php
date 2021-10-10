@@ -1,21 +1,17 @@
 <?php
-ob_start(); // To allow setting header when there's already page contents rendered
+ob_start();
 $PAGE_ID = "login";
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
-
-// Database connection
-require('connection.php');
+require("start.php");
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_POST['username']) && !empty($_POST['password'])) {
-        //Run some SQL query here to find that user
         $stmt = $dbh->prepare("SELECT * FROM `user` WHERE `username` = ? AND `password` = ?");
         if ($stmt->execute([
                 $_POST['username'],
                 hash('sha256', $_POST['password'])
             ]) && $stmt->rowCount() == 1) {
             $row = $stmt->fetchObject();
-            $_SESSION['user_id'] = $row->id;
-            //Successfully logged in, redirect user to referer, or index page
+            $_SESSION['id'] = $row->id;
             if (empty($_SESSION['referer'])) {
                 header("Location: index.php");
             } else {
@@ -33,15 +29,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
     <title>Login</title>
 </head>
 <body>
 <h1>Please Login</h1>
 <h2>Please enter your username and password</h2>
-<form class="user" method="post">
-    <div>
+<form class="user" method="post" >
+    <div class="mb-3">
         <input type="text" id="loginUsername" name="username" placeholder="Username">
     </div>
     <div>
@@ -50,3 +46,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit" >Login</button>
 </form>
 </body>
+</html>

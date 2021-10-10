@@ -1,21 +1,16 @@
-<!doctype html>
-<head>
-    <title>Photo-shoot Information</title>
-</head>
+<?php require("header.php");
+$PAGE_ID = "photo_shoot";?>
+<title>Photo-shoot Information</title>
 <body>
-<h1>Photo-shoot Information</h1>
-<div class="center row">
-    <button onclick="window.location='photo_insert.php'">Add new photo-shoot information</button>
-</div>
+<h1 class="text-center">Photo-shoot Information</h1>
+<button class="btn btn-outline-primary mx-sm-2" onclick="window.location='photo_insert.php'">Add new photo-shoot information</button>
 <?php
 /** @var $dbh PDO */
-#$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
-
-include("connection.php");
+$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 $query = "SELECT * FROM `photo_shoot` INNER JOIN `client` ON photo_shoot.client_id = client.client_id ORDER BY client_firstname,client_lastname;";
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>
-    <table border="1">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>Client ID</th>
@@ -40,9 +35,11 @@ if ($stmt->execute()): ?>
             <td><?= $row->photo_shoot_date ?></td>
             <td><?= $row->photo_shoot_quote ?></td>
             <td><?= $row->photo_shoot_other_information ?></td>
-            <td><button id="update" onclick="window.location='photo_update.php?photo_shoot_name=<?= $row->photo_shoot_name?>'">Update</button>
-                <button id="delete" onclick="window.location='photo_delete.php?photo_shoot_name=<?= $row->photo_shoot_name?>'">Delete</button>
-                <button id="details" onclick="window.location='photo_details.php?photo_shoot_name=<?=$row->photo_shoot_name?>'">Details</button></td>
+            <td>
+                <button id="details" class="btn btn-success btn-sm" onclick="window.location='photo_details.php?photo_shoot_name=<?=$row->photo_shoot_name?>'">Details</button>
+                <button id="update" class="btn btn-info btn-sm" onclick="window.location='photo_update.php?photo_shoot_name=<?= $row->photo_shoot_name?>'">Update</button>
+                <button id="delete" class="btn btn-danger btn-sm" onclick="window.location='photo_delete.php?photo_shoot_name=<?= $row->photo_shoot_name?>'">Delete</button>
+            </td>
             </td>
             </tr>
         <?php endwhile; ?>
@@ -53,4 +50,4 @@ if ($stmt->execute()): ?>
 endif; ?>
 </body>
 </html>
-<?php
+<?php require("footer.php") ?>
