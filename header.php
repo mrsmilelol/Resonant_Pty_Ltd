@@ -1,5 +1,5 @@
 <?php
-ob_start(); // To allow setting header when there's already page contents rendered
+ob_start();
 
 /** @var string $PAGE_ID Identify which page is loading the header, so the active menu item can be correctly recognised */
 /** @var string $PAGE_USERNAME Username of the current logged in user */
@@ -17,8 +17,7 @@ require("start.php")
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="product.php">Product</a>
                 </li>
@@ -34,7 +33,12 @@ require("start.php")
                 <li class="nav-item">
                     <a class="nav-link" href="product_prices_update.php">Multiple Products</a>
                 </li>
+                <li class="nav-item mx-sm-1">
+                    <a class="nav-link" href="#"><?= $PAGE_USERNAME ?></a>
+                </li>
+                <li class="nav-item d-md-flex">
+                    <a class="btn btn-danger btn-sm position-relative" href="logout.php">Logout</a>
+                </li>
             </ul>
-        </div>
     </div>
 </nav>

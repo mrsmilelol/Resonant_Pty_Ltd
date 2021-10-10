@@ -34,16 +34,34 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login</title>
 </head>
 <body>
-<h1>Please Login</h1>
-<h2>Please enter your username and password</h2>
-<form class="user" method="post" >
-    <div class="mb-3">
-        <input type="text" id="loginUsername" name="username" placeholder="Username">
+<div class="row justify-content-center">
+    <div class="col-xl-5 col-lg-12 col-md-9">
+        <div class="card o-hidden border-0 my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Please login</h1>
+                            <form class="user" method="post" >
+                                <div class="mb-3 text-center">
+                                    <label class="form-label">Username</label>
+                                    <input type="text" id="loginUsername" class="form-control " name="username" placeholder="Username">
+                                </div>
+                                <div class="mb-3 text-center">
+                                    <label class="form-label">Password</label>
+                                    <input type="password" id="loginUserPassword" class="form-control" name="password" placeholder="Password">
+                                </div>
+                                <button type="submit" class="btn btn-secondary" >Login</button>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <input type="password" id="loginUserPassword" name="password" placeholder="Password">
-    </div>
-    <button type="submit" >Login</button>
+</div>
 </form>
 </body>
 </html>
