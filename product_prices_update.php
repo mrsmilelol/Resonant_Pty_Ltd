@@ -1,9 +1,7 @@
-<!doctype html>
-<head>
-    <title>Product Information</title>
-</head>
-<body>
-<h1>Product Information</h1>
+<?php require("header.php");
+$PAGE_ID = "multiple_prices";?>
+<title>Editing Multiple Product's Prices</title>
+<h1 class="text-center">Editing Multiple Product's Prices</h1>
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['upcs'])) {
@@ -29,8 +27,8 @@ $query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id =
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>
     <form method="post">
-        <input type="submit" value="Update Prices Of Selected Products"/>
-        <table border="1">
+        <input type="submit" class="btn btn-outline-primary mx-sm-2" value="Update Prices Of Selected Products"/>
+        <table class="table table-bordered">
             <thead>
             <tr>
                 <th>Update?</th>
@@ -46,7 +44,7 @@ if ($stmt->execute()): ?>
                 </td>
                 <td><?= $row->product_upc ?></td>
                 <td><?= $row->product_name ?></td>
-                <td><input type="number" name="prices[<?=$row->product_upc?>]" value="<?= $row->product_price ?>"/></td>
+                <td>$<input type="number" name="prices[<?=$row->product_upc?>]" value="<?= $row->product_price ?>"/></td>
                 </tr>
             <?php endwhile; ?>
             </tbody>
@@ -54,5 +52,4 @@ if ($stmt->execute()): ?>
 <?php else:
     die(friendlyError($stmt->errorInfo()[2]));
 endif; ?>
-</body>
-</html>
+<?php require("footer.php")?>

@@ -1,17 +1,18 @@
-<html
-<head>
-    <title>Client Information</title>
-</head>
+<?php
+$PAGE_ID = "client";
+require('header.php')
+?>
+<title>Client Information</title>
 <body>
-<h1>Client Information</h1>
-<button onclick="window.location='client_insert.php'">Add new client information</button>
+<h1 class="text-center">Client Information</h1>
+<a class="btn btn-outline-primary mx-sm-2" href="client_insert.php">Add new client information</a>
 <?php
 /** @var $dbh PDO */
-include("connection.php");
+$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 $query = "SELECT * FROM `client`;";
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>
-    <table border="1">
+    <table class="table table-bordered">
         <thead>
         <tr>
             <th>ID</th>
@@ -22,6 +23,7 @@ if ($stmt->execute()): ?>
             <th>Email</th>
             <th>Subscribed</th>
             <th>Client Other Information</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -36,8 +38,8 @@ if ($stmt->execute()): ?>
                 <td><?= $row->client_email ?></td>
                 <td><?= $row->client_subscribed ?></td>
                 <td><?= $row->client_other_information ?></td>
-                <td><button id="update" onclick="window.location='client_update.php?client_id=<?= $row->client_id?>'">Update</button>
-                    <button id="delete" onclick="window.location='client_delete.php?client_id=<?= $row->client_id?>'">Delete</button></td>
+                <td><button id="update" class="btn btn-info btn-sm" onclick="window.location='client_update.php?client_id=<?= $row->client_id?>'">Update</button>
+                    <button id="delete" class="btn btn-danger btn-sm" onclick="window.location='client_delete.php?client_id=<?= $row->client_id?>'">Delete</button></td>
             </tr>
         <?php endwhile; ?>
         </tbody>
@@ -45,5 +47,4 @@ if ($stmt->execute()): ?>
 <?php else:
     die(friendlyError($stmt->errorInfo()[2]));
 endif; ?>
-</body>
-</html>
+<?php require("footer.php")?>

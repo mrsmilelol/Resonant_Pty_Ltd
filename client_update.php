@@ -1,19 +1,20 @@
 <?php
 ob_start();
 /** @var $dbh PDO */
+require("header.php");
 if (!isset($_GET['client_id'])) {
     header("Location: client.php");
     die();
 }
 ?>
-<html
-<head>
-    <title>Update client #<?= $_GET['client_id'] ?></title>
-</head>
+<title>Update client #<?= $_GET['client_id'] ?></title>
+<h3 class="mx-sm-3">Update client #<?= $_GET['client_id']?></h3>
 <body>
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 if (!empty($_POST)) {
+    foreach ($_POST as $fieldName => $fieldValue) {
+    }
     $query = "UPDATE `client` SET `client_firstname`=:client_firstname,`client_lastname`=:client_lastname,`client_address`=:client_address,`client_phone`=:client_phone,`client_email`=:client_email, `client_subscribed` =:client_subscribed, `client_other_information` =:client_other_information WHERE `client_id`=:client_id;";
     $stmt = $dbh->prepare($query);
     $parameters = [
@@ -40,43 +41,45 @@ if (!empty($_POST)) {
         if ($stmt->rowCount() > 0) {
             $record = $stmt->fetchObject(); ?>
             <form method="post">
-                <div class="aligned-form">
+                <div class="form-group">
                     <div class="row">
-                        <label for="id">ID</label>
-                        <input type="number" id="client_id" value="<?= $record->client_id ?>" disabled/>
+                        <label for="id" class="mx-sm-3">ID</label>
+                        <input type="number" id="client_id" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_id ?>"/>
                     </div>
                     <div class="row">
-                        <label for="firstname">Firstname</label>
-                        <input type="text" id="client_firstname" name="client_firstname" value="<?= $record->client_firstname ?>" />
+                        <label for="firstname" class="mx-sm-3">Firstname</label>
+                        <input type="text" id="client_firstname" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_firstname" required value="<?= $record->client_firstname ?>" />
                     </div>
                     <div class="row">
-                        <label for="lastname">Lastname</label>
-                        <input type="text" id="client_lastname" name="client_lastname" value="<?= $record->client_lastname ?>"/>
+                        <label for="lastname" class="mx-sm-3">Lastname</label>
+                        <input type="text" id="client_lastname" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_lastname" required value="<?= $record->client_lastname ?>"/>
                     </div>
                     <div class="row">
-                        <label for="address">Address</label>
-                        <input type="text" id="client_address" name="client_address" value="<?= $record->client_address ?>""/>
+                        <label for="address" class="mx-sm-3">Address</label>
+                        <input type="text" id="client_address" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_address" required value="<?= $record->client_address ?>""/>
                     </div>
                     <div class="row">
-                        <label for="phone">Phone</label>
-                        <input type="text" id="client_phone" name="client_phone" value="<?= $record->client_phone ?>" />
+                        <label for="phone" class="mx-sm-3">Phone</label>
+                        <input type="text" id="client_phone" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_phone" required value="<?= $record->client_phone ?>" />
                     </div>
                     <div class="row">
-                        <label for="email">Email</label>
-                        <input type="text" id="client_email" name="client_email" value="<?= $record->client_email ?>" />
+                        <label for="email" class="mx-sm-3">Email</label>
+                        <input type="text" id="client_email" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_email" required value="<?= $record->client_email ?>" />
                     </div>
                     <div class="row">
-                        <label for="subscribed">Subscribed</label>
-                        <input type="text" id="client_subscribed" name="client_subscribed" value="<?= $record->client_subscribed ?>" />
+                        <label for="subscribed" class="mx-sm-3">Subscribed</label>
+                        <input type="text" id="client_subscribed" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_subscribed" required value="<?= $record->client_subscribed ?>" />
                     </div>
                     <div class="row">
-                        <label for="client_other_information">Client Other Information</label>
-                        <input type="text" id="client_other_information" name="client_other_information" value="<?= $record->client_other_information ?>" />
+                        <label for="client_other_information" class="mx-sm-3">Client Other Information</label>
+                        <textarea type="text" id="client_other_information" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_other_information" rows="5"><?= empty($_POST['client_other_information']) ? $record->client_other_information : $_POST['description'] ?></textarea>
                     </div>
                 </div>
-                <div class="row center">
-                    <input type="submit" value="Update"/>
-                    <button type="button" onclick="window.location='client.php';return false;">Cancel</button>
+                <div class="row">
+                    <input class="btn btn-outline-success w-25 mx-sm-4 mb-2" type="submit" value="Update"/>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-outline-danger w-25 mx-sm-4 mb-2" onclick="window.location='client.php';return false;">Cancel</button>
                 </div>
             </form>
         <?php } else {
@@ -87,5 +90,5 @@ if (!empty($_POST)) {
     }
 }
 ?>
-</body>
-</html>
+<?php require("footer.php")?>
+

@@ -4,14 +4,11 @@ ob_start();
 /** @var $db_name string */
 /** @var object $product Product details */
 /** @var object $product_images Product images */
+require("header.php")
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Add new product</title>
-</head>
+<title>Update a product</title>
 <body>
-<h1>Add new product</h1>
+<h3 class="mx-sm-3">Update a product</h3>
 <?php
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 if (isset($_GET['product_upc'])) {
@@ -50,13 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $serverSideErrors = [];
         $product_image_filenames = [];
         $dbh->beginTransaction();
-        foreach ($_POST as $fieldName => $fieldValue) {
-            if (empty($fieldValue)) {
-                echo friendlyError("'$fieldName' field is empty. Please fix the issue try again. ");
-                echo "<div class=\"center row\"><button onclick=\"window.history.back()\">Back to previous page</button></div>";
-                die();
-            }
-        }
         $query = "UPDATE `product` SET `product_name`=:product_name, `product_price`=:product_price,`category_id`=:category_id WHERE `product_upc`=:product_upc;";
         $stmt = $dbh->prepare($query);
         $parameters = [
@@ -145,54 +135,68 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<?php if (isset($ERROR)): ?>
+    <div class="card mb-4 border-left-danger">
+        <div class="card-body">Cannot modify the product due to the following error:<br><code>
+                <ul>
+                    <li><?= $ERROR ?></li>
+                </ul>
+            </code></div>
+    </div>
+<?php endif; ?>
 <form method="post" enctype="multipart/form-data">
-    <div class="aligned-form">
+    <div class="form-group">
         <div class="row">
-            <label for="product_upc">UPC</label>
-            <input type="number" id="product_upc" name="product_upc" value="<?= $product->product_upc ?>">
+            <label for="product_upc" class="mx-sm-3">UPC</label>
+            <input type="number" id="product_upc" class="form-control-sm mx-sm-4 mb-2 w-25" name="product_upc" required value="<?= $product->product_upc ?>">
         </div>
         <div class="row">
-            <label for="product_name">Product Name</label>
-            <input type="text" id="product_name" name="product_name" value="<?= $product->product_name ?>">
+            <label for="product_name" class="mx-sm-3">Product Name</label>
+            <input type="text" id="product_name" class="form-control-sm mx-sm-4 mb-2 w-25" name="product_name" required value="<?= $product->product_name ?>">
         </div>
         <div class="row">
-            <label for="product_price">Product Price</label>
-            <input type="number" id="product_price" name="product_price" value="<?= $product->product_price ?>">
+            <label for="product_price" class="mx-sm-3">Product Price</label>
+            <input type="number" id="product_price" class="form-control-sm mx-sm-4 mb-2 w-25" name="product_price" required value="<?= $product->product_price ?>">
         </div>
         <div class="row">
             <?php $category_stmt = $dbh->prepare("SELECT * FROM `category` ORDER BY `category_name`");
             if ($category_stmt->execute() && $category_stmt->rowCount() > 0) { ?>
-                <label for="category_id">Category</label>
-                <select name="category_id" id="category_id">
+                <label for="category_id" class="mx-sm-3">Category</label>
+                <select name="category_id" id="category_id" class=" form-control-sm mx-sm-4 mb-2 w-25">
                     <?php while ($row = $category_stmt->fetchObject()): ?>
                         <option value="<?= $row->category_id ?>"><?= $row->category_name ?></option>
                     <?php endwhile; ?>
                 </select>
-            <?php } ?>">
+            <?php } ?>
         </div>
-        <div class="row">
-            <div class="custom-file">
+        <div class="form-group">
+            <label for="productImage" class="mx-sm-3">Product images</label>
+            <div class="custom-file mx-sm-3" >
                 <input type="file" class="custom-file-input" id="productProductImages" name="images[]" multiple>
-                <label class="custom-file-label" for="customFile">Choose one or more image files</label>
+                <label class="custom-file-label" for="customFile"></label>
             </div>
+            <div class="form-group mt-2">
             <?php if (empty($product_images)): ?>
-                <p>This product has no images</p>
+                <p class="mx-sm-3">This product has no images</p>
             <?php else: ?>
-                <p>Tick the box in front of each image to delete that image</p>
+                <p class="mx-sm-3">Tick the box in front of each image to delete that image</p>
                 <?php foreach ($product_images as $image): ?>
-                    <div class="form-check form-check-inline">
+                    <div class="form-check form-check-inline mx-sm-4">
                         <input class="form-check-input" type="checkbox" id="productProductImageDelete-<?= $image->product_image_id ?>" name="delete_images[]" value="<?= $image->product_image_id ?>" <?= (isset($_POST['delete_images']) && in_array($image->product_image_id, $_POST['delete_images'])?"checked":"") ?>>
                         <label class="form-check-label" for="productProductImageDelete-<?= $image->product_image_id ?>"><img src="product_images/<?= $image->product_image_filename ?>" width="200" height="200" class="rounded mb-1 product-image-thumbnail" alt="Product Image"></label>
                     </div>
                 <?php endforeach;
             endif; ?>
+            </div>
         </div>
     </div>
-    <div class="row center">
-        <input type="submit" value="Update"/>
-        <button type="button" onclick="window.location='product.php';return false;">Cancel</button>
+    <div class="row">
+        <input class="btn btn-outline-success w-25 mx-sm-4 mb-2" type="submit" value="Update"/>
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-outline-danger w-25 mx-sm-4 mb-2" onclick="window.location='product.php';return false;">Cancel</button>
     </div>
 </form>
-<?php ?>
-</body>
-</html>
+<?php require("footer.php")?>
+
+

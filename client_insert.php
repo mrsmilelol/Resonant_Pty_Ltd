@@ -3,14 +3,10 @@ ob_start();
 /** @var $dbh PDO */
 /** @var $dbname string */
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
+require("header.php");
 ?>
-<!doctype html>
-<html>
-<head>
-    <title>Add new client</title>
-</head>
 <body>
-<h1>Add new client</h1>
+<h3 class="mx-sm-3">Add new client</h3>
 <?php
 if(!empty($_POST)){
     $query = "INSERT INTO client (client_firstname, client_lastname, client_address,`client_phone`,`client_email`, client_subscribed, client_other_information) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -30,45 +26,45 @@ if(!empty($_POST)){
         if ($stmt->execute([$newRecordId])) {
             if ($stmt->rowCount() > 0) {
                 $record = $stmt->fetchObject(); ?>
-                <div class="center row">New client has been added.</div>
+                <div class="mx-sm-3" >New client has been added.</div>
                 <form method="post">
-                    <div class="aligned-form">
+                    <div class="form-group">
                         <div class="row">
-                            <label for="id">ID</label>
-                            <input type="number" id="id" value="<?= $record->client_id ?>" disabled/>
+                            <label for="id" class="mx-sm-3">ID</label>
+                            <input type="number" id="id" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_id ?>" />
                         </div>
                         <div class="row">
-                            <label for="firstname">Firstname</label>
-                            <input type="text" id="firstname" value="<?= $record->client_firstname ?>" disabled/>
+                            <label for="firstname" class="mx-sm-3">Firstname</label>
+                            <input type="text" id="firstname" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_firstname ?>" />
                         </div>
-                        <div class="row">
+                        <div class="row" >
                             <label for="lastname">Lastname</label>
-                            <input type="text" id="lastname" value="<?= $record->client_lastname ?>" disabled/>
+                            <input type="text" id="lastname" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_lastname ?>" />
                         </div>
-                        <div class="row">
-                            <label for="address">Address</label>
-                            <input type="text" id="address" value="<?= $record->client_address ?>"disabled/>
+                        <div class="row" >
+                            <label for="address" class="mx-sm-3">Address</label>
+                            <input type="text" id="address" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_address ?>"/>
                         </div>
-                        <div class="row">
-                            <label for="phone">Phone</label>
-                            <input type="text" id="phone" value="<?= $record->client_phone ?>" disabled/>
+                        <div class="row" >
+                            <label for="phone" class="mx-sm-3">Phone</label>
+                            <input type="text" id="phone" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_phone ?>" />
                         </div>
-                        <div class="row">
-                            <label for="email">Email</label>
-                            <input type="text" id="email" value="<?= $record->client_email ?>" disabled/>
+                        <div class="row" >
+                            <label for="email" class="mx-sm-3">Email</label>
+                            <input type="text" id="email" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_email ?>" />
                         </div>
-                        <div class="row">
-                            <label for="subscribed">Subscribed</label>
-                            <input type="text" id="subscribed" value="<?= $record->client_subscribed ?>" disabled/>
+                        <div class="row" >
+                            <label for="subscribed" class="mx-sm-3">Subscribed</label>
+                            <input type="text" id="subscribed" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_subscribed ?>" />
                         </div>
-                        <div class="row">
-                            <label for="client_other_information">Client Other Information</label>
-                            <input type="text" id="client_other_information" value="<?= $record->client_other_information ?>" disabled/>
+                        <div class="row" >
+                            <label for="client_other_information" class="mx-sm-3">Client Other Information</label>
+                            <textarea type="text" id="client_other_information" class="form-control-sm mx-sm-4 mb-2 w-25" value="<?= $record->client_other_information ?>"></textarea>
                         </div>
                     </div>
                 </form>
                 <div class="center row">
-                    <button onclick="window.location='client.php'">Back to the client list</button>
+                    <button class="btn btn-outline-info w-25 mx-sm-4 mb-2" onclick="window.location='client.php'">Back to the client list</button>
                 </div>
             <?php } else {
                 echo "Weird, the client just added has mysteriously disappeared!? ";
@@ -88,46 +84,47 @@ else {
     $nextId = ($stmt->execute() || $stmt->rowCount() > 0) ? $stmt->fetchObject()->AUTO_INCREMENT : "Not available";
     ?>
     <form method="post">
-        <div class="aligned-form">
+        <div class="form-group">
             <div class="row">
-                <label for="client_id">ID</label>
-                <input type="text" id="client_id" value="<?= $nextId ?>" disabled/>
+                <label for="client_id" class="mx-sm-3">ID</label>
+                <input type="text" id="client_id" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $nextId ?>"/>
             </div>
             <div class="row">
-                <label for="client_firstname">First Name</label>
-                <input type="text" id="client_firstname" name="client_firstname"/>
+                <label for="client_firstname" class="mx-sm-3">First Name</label>
+                <input type="text" id="client_firstname" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_firstname" required/>
             </div>
             <div class="row">
-                <label for="client_lastname">Last Name</label>
-                <input type="text" id="client_lastname" name="client_lastname"/>
+                <label for="client_lastname" class="mx-sm-3">Last Name</label>
+                <input type="text" id="client_lastname" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_lastname" required/>
             </div>
             <div class="row">
-                <label for="client_address">Address</label>
-                <input type="text" id="client_address" name="client_address"/>
+                <label for="client_address" class="mx-sm-3">Address</label>
+                <input type="text" id="client_address" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_address" required/>
             </div>
             <div class="row">
-                <label for="client_phone">Phone</label>
-                <input type="text" id="client_phone" name="client_phone"/>
+                <label for="client_phone" class="mx-sm-3">Phone</label>
+                <input type="text" id="client_phone" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_phone" required/>
             </div>
             <div class="row">
-                <label for="client_email">Email</label>
-                <input type="text" id="client_email" name="client_email"/>
+                <label for="client_email" class="mx-sm-3">Email</label>
+                <input type="text" id="client_email" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_email" required/>
             </div>
             <div class="row">
-                <label for="client_subscribed">Subscribed</label>
-                <input type="text" id="client_subscribed" name="client_subscribed"/>
+                <label for="client_subscribed" class="mx-sm-3">Subscribed</label>
+                <input type="text" id="client_subscribed" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_subscribed" required/>
             </div>
             <div class="row">
-                <label for="client_other_information">Other Information</label>
-                <input type="text" id="client_other_information" name="client_other_information"/>
+                <label for="client_other_information" class="mx-sm-3">Other Information</label>
+                <textarea type="text" id="client_other_information" class="form-control-sm mx-sm-4 mb-2 w-25" name="client_other_information"></textarea>
             </div>
         </div>
-        <div class="row center">
-            <input type="submit" value="Add"/>
-            <button type="button" onclick="window.location='client.php';return false;">Cancel</button>
+        <div class="row">
+            <input type="submit" class="btn btn-outline-success w-25 mx-sm-4 mb-2" value="Add"/>
+        </div>
+        <div class="row">
+            <button type="button" class="btn btn-outline-danger w-25 mx-sm-4 mb-2" onclick="window.location='client.php';return false;">Cancel</button>
         </div>
     </form>
-<?php } ?>
-</body>
-</html>
+<?php require("footer.php");} ?>
+
 
