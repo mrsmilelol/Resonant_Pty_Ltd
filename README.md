@@ -13,7 +13,7 @@ Link: https://git-prd.infotech.monash.edu/fit2104-cl/fit2104-2021-s2/pair_lab02_
 username: scheng0
 password: scheng0
 filename of schema: schema1.sql
-
+please set the composer.exe in the directory before printing the pdf
 Work breakdown - Hurdle
 ---------------------------------
 -Client Page:
