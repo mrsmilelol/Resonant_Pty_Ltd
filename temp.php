@@ -1,3 +1,15 @@
+<html>
+<head>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 10pt;
+        }
+
+    </style>
+</head>
+<body>
+
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
@@ -60,14 +72,59 @@ try {
     $data = '';
     $data.='<h1>Client Details</h1>';
 
-    $data.='<strong>ID: </strong>'.$ID.'<br/>';
-    $data.='<strong>First Name: </strong>'.$fname.'<br/>';
-    $data.='<strong>Last Name: </strong>'.$lname.'<br/>';
-    $data.='<strong>Address: </strong>'.$address.'<br/>';
-    $data.='<strong>Phone: </strong>'.$phone.'<br/>';
-    $data.='<strong>Email: </strong>'.$email.'<br/>';
-    $data.='<strong>Subscribed: </strong>'.$subscribed.'<br/>';
-    $data.='<strong>Other Information: </strong>'.$other_information.'<br/>';
+    $body_id='<table width="20%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="20%"  style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">ID:</span><br/>'.$ID.'</td>
+    </tr>
+</table>';
+    $body_name = '<table width="100%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="30%" style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">First Name: </span><br/>'.$fname.'</td>
+        <td width="10%">&nbsp;</td>
+        <td width="30%" style="border: 0.1mm solid #888888;"><span style="font-size: 10pt; color: #555555; font-family: sans;">Last Name: </span><br/>'.$lname.'</td>
+    </tr>
+</table>';
+    $body_address = '<table width="100%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="80%"  style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">Address: </span><br/>'.$address.'</td>
+    </tr>
+</table>';
+    $body_phone = '<table width="20%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="20%"  style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">Phone: </span><br/>'.$phone.'</td>
+    </tr>
+</table>';
+    $body_email = '<table width="100%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="80%"  style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">Email: </span><br/>'.$email.'</td>
+    </tr>
+</table>';
+    $body_subscribed = '<table width="20%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="20%"  style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">Subscribed: </span><br/>'.$subscribed.'</td>
+    </tr>
+</table>';
+    $body_info = '<table width="100%" style="font-family: serif;" cellpadding="10">
+    <tr>
+        <td width="80%"  style="border: 0.1mm solid #888888; "><span style="font-size: 10pt; color: #555555; font-family: sans;">Other Information: </span><br/>'.$other_information.'<br/><br/><br/><br/><br/><br/></td>
+    </tr>
+</table>';
+    $data.= $body_id;
+    $data.='<br/>';
+    $data.=$body_name;
+    $data.='<br/>';
+    $data.=$body_address;
+    $data.='<br/>';
+    $data.=$body_phone;
+    $data.='<br/>';
+    $data.=$body_email;
+    $data.='<br/>';
+    $data.=$body_subscribed;
+    $data.='<br/>';
+    $data.=$body_info;
+
+
+
 
     $mpdf->WriteHTML($data);
 
