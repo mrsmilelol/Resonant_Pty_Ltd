@@ -48,8 +48,10 @@ if ($stmt->execute()): ?>
                 </tr>
             <?php endwhile; ?>
             </tbody>
+        </table>
     </form>
 <?php else:
     die(friendlyError($stmt->errorInfo()[2]));
 endif; ?>
-<?php require("footer.php")?>
+
+<?php require("footer.php");?>
