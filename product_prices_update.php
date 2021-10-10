@@ -13,12 +13,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['upcs'])) {
                 'product_price' => $_POST['prices'][$upcs],
                 'product_upc' => $upcs
             ])) {
-                echo "<h3>Error occurred while updating price of ISBN# $upcs!</h3>";
+                echo "<h3>Error occurred while updating price of UPC# $upcs!</h3>";
                 break;
             }
         }
         else {
-            echo "<h3>The price of ISBN# $upcs does not exist!</h3>";
+            echo "<h3>The price of UPC# $upcs does not exist!</h3>";
             break;
         }
     }
