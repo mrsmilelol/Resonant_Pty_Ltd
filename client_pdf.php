@@ -4,6 +4,7 @@ ob_start();
 /** @var $db_name string */
 /** @var object $client client details */
 include("connection.php");
+require("header.php");
 ?>
 <html>
 <head>
@@ -66,4 +67,5 @@ if (isset($_GET['client_id'])) {
 </form>
 </body>
 </html>
+<?php require("footer.php");
 
