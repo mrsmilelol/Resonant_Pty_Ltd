@@ -1,7 +1,7 @@
 <?php
 $PAGE_ID = "email";
 $PAGE_HEADER = "Sending email to users";
-include("connection.php")
+require("header.php");
 
 /** @var PDO $dbh Database connection */
 ?>
@@ -10,7 +10,7 @@ include("connection.php")
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1<>>Sending email to clients</h1>
+    <h1<>Sending email to clients</h1>
     <p>This page allows you to send bulk email to all selected clients. </p>
     <form method="post" action="email_send.php" id="send-emails">
         <div class="card shadow mb-4">
