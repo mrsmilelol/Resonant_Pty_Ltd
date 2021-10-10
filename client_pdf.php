@@ -3,12 +3,9 @@ ob_start();
 /** @var $dbh PDO */
 /** @var $db_name string */
 /** @var object $client client details */
-include("connection.php");
+require("header.php");
 ?>
-<html>
-<head>
-    <title>Client pdf</title>
-</head>
+<title>Client pdf</title>
 <body>
 <h1>Details of client ID "<?=$_GET['client_id']  ?>" that you are going to print</h1>
 <?php
@@ -64,6 +61,5 @@ if (isset($_GET['client_id'])) {
         </div>
     </div>
 </form>
-</body>
-</html>
+<?php require("footer.php"); ?>
 
