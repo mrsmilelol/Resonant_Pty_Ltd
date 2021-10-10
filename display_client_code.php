@@ -9,6 +9,10 @@ echo "Client_insert.php";
 echo highlight_file("client_insert.php");
 echo "Client_update.php";
 echo highlight_file("client_update.php");
+echo "Email.php";
+echo highlight_file("email.php");
+echo "Email_send.php";
+echo highlight_file("email_send.php");
 echo "Footer.php";
 echo highlight_file("footer.php");
 ?>
