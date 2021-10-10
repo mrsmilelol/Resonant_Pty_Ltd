@@ -1,25 +1,213 @@
-CREATE TABLE `product`(
-                          `product_name` VARCHAR(100) NOT NULL,
-                          `product_upc` INT(11) NOT NULL PRIMARY KEY,
-                          `product_price` INT(11) NOT NULL,
-                          `category_id` INT(11) NOT NULL
-);
-CREATE TABLE `category`(
-    `category_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    `category_name` VARCHAR(100) NOT NULL
-);
-   ALTER TABLE
-    `product` ADD CONSTRAINT `Prod_Categ_FK` FOREIGN KEY(`category_id`) REFERENCES `category`(`category_id`);
-CREATE TABLE `product_image`(`product_image_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                                `product_image_filename` VARCHAR(100) NOT NULL,
-                                `product_upc` INT(11) NOT NULL
-); ALTER TABLE
-    `product_image` ADD CONSTRAINT `Image_Prod_FK` FOREIGN KEY(`product_upc`) REFERENCES `product`(`product_upc`);
-CREATE TABLE `user`(`id` INT(11) NOT NULL PRIMARY KEY,
-                    `email` VARCHAR(64) NOT NULL,
-                    `username` VARCHAR(64) NOT NULL,
-                    `password` VARCHAR(64) NOT NULL
-);
+
+
+CREATE TABLE `category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `category` (`category_id`, `category_name`) VALUES
+(1, 'Portrait'),
+(2, 'Fashion'),
+(3, 'Sports'),
+(4, 'Editorial'),
+(5, 'Architectural'),
+(6, 'Black and White'),
+(7, 'Advertising'),
+(8, 'Still Life'),
+(9, 'Street'),
+(10, 'Adventure'),
+(11, 'Astrophotography'),
+(12, 'Business'),
+(13, 'Candid'),
+(14, 'City Scape'),
+(15, 'Commercial'),
+(16, 'Creative'),
+(17, 'Documentary'),
+(18, 'Drone');
+
+
+CREATE TABLE `client` (
+  `client_id` int(11) NOT NULL,
+  `client_firstname` varchar(64) NOT NULL,
+  `client_lastname` varchar(64) NOT NULL,
+  `client_address` varchar(64) NOT NULL,
+  `client_phone` varchar(64) NOT NULL,
+  `client_email` varchar(64) NOT NULL,
+  `client_subscribed` varchar(64) NOT NULL,
+  `client_other_information` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `client` (`client_id`, `client_firstname`, `client_lastname`, `client_address`, `client_phone`, `client_email`, `client_subscribed`, `client_other_information`) VALUES
+(1, 'Phoebe', 'Fisher', 'P.O. Box 636, 2890 Tempus Avenue', '(05) 4437 9456', 'velit.egestas@ipsumphasellus.com', 'Subscribed', ''),
+(2, 'Cullen', 'Puckett', '1287 Nunc St.', '(08) 0416 9059', 'vestibulum@venenatislacusetiam.org', 'Subscribed', ''),
+(3, 'Seth', 'Vance', 'Ap #482-1568 Leo. Rd.', '(07) 6614 7728', 'placerat.orci@morbi.ca', 'Unsubscribed', ''),
+(4, 'Veda', 'Tillman', '467-7955 Cursus. St.', '(08) 5734 4351', 'eu.odio.phasellus@at.net', 'Subscribed', ''),
+(5, 'Tashya', 'Brooks', 'Ap #391-2665 Suspendisse Av.', '(08) 3624 3545', 'augue.scelerisque@diamvelarcu.org', 'Unsubscribed', ''),
+(6, 'Simon', 'Carter', '480-2061 Nibh Street', '(08) 3215 1064', 'donec.sollicitudin@ultricesmaurisipsum.com', 'Unsubscribed', ''),
+(7, 'Genevieve', 'Mann', '748-2097 Nulla Rd.', '(02) 1524 3656', 'nullam.suscipit.est@nullaeget.com', 'Subscribed', ''),
+(8, 'Brent', 'Martin', '912-4635 Molestie St.', '(06) 1011 5887', 'mauris.erat.eget@euturpis.net', 'Unsubscribed', ''),
+(9, 'Lucas', 'Walter', 'P.O. Box 168, 3318 Nisi Rd.', '(07) 7720 5471', 'nunc.quis.arcu@acurna.org', 'Subscribed', ''),
+(10, 'Elvis', 'Haney', '676-5814 Tempus, St.', '(02) 3067 1476', 'integer.vulputate@pharetraquisqueac.edu', 'Subscribed', ''),
+(11, 'Caesar', 'Prince', '258-3872 Accumsan St.', '(05) 2269 1281', 'pellentesque@dictumsapien.co.uk', 'Unsubscribed', ''),
+(12, 'Erich', 'York', '176-7103 Hendrerit Street', '(03) 9303 1808', 'primis.in@dui.ca', 'Subscribed', ''),
+(13, 'Urielle', 'Holmes', '867-5059 Faucibus St.', '(08) 2757 5594', 'montes.nascetur@nullamagna.co.uk', 'Unsubscribed', ''),
+(14, 'Kamal', 'Carney', 'Ap #783-4988 Fusce Av.', '(02) 9952 4264', 'et.ultrices.posuere@mauris.co.uk', 'Subscribed', ''),
+(15, 'Sandra', 'Davis', '8227 Nunc, Avenue', '(02) 5237 1386', 'dolor.quisque@miduis.org', 'Subscribed', ''),
+(16, 'Megan', 'Golden', 'Ap #132-139 Sem Street', '(09) 6803 1820', 'ultrices@dolortempus.ca', 'Subscribed', ''),
+(17, 'Owen', 'Hopkins', 'Ap #471-9190 Mauris Street', '(05) 5215 8113', 'id.nunc@integeraliquam.org', 'Unsubscribed', ''),
+(18, 'Audrey', 'Charles', '921-3502 Sodales Avenue', '(03) 4479 7940', 'odio@et.net', 'Subscribed', ''),
+(19, 'Chandler', 'Stone', 'Ap #287-9036 Sociosqu St.', '(03) 1144 5733', 'luctus.et@gravida.co.uk', 'Subscribed', ''),
+(20, 'Ishmael', 'Vazquez', 'Ap #117-9863 Proin St.', '(06) 1842 6432', 'tellus.aenean@quisquevarius.com', 'Subscribed', ''),
+(21, 'Laurel', 'Salazar', '142-8268 Ante St.', '(07) 1687 2429', 'eu.tempor.erat@suscipitnonummyfusce.org', 'Unsubscribed', ''),
+(22, 'Levi', 'Strickland', '123-7970 Ligula Ave', '(09) 2383 0681', 'maecenas.libero@nunclectuspede.edu', 'Unsubscribed', ''),
+(23, 'Laith', 'White', '588-2672 Donec Av.', '(01) 6767 9053', 'faucibus.ut@magna.ca', 'Subscribed', ''),
+(24, 'Claire', 'Lott', '560-5663 Metus Rd.', '(02) 2325 5584', 'sem.molestie@donecconsectetuermauris.com', 'Unsubscribed', ''),
+(25, 'Raya', 'Maynard', '460-6788 Arcu. St.', '(06) 1484 4280', 'dapibus.rutrum@egestasligula.edu', 'Subscribed', ''),
+(26, 'Miriam', 'Dean', 'Ap #213-7500 Proin St.', '(04) 6575 7494', 'massa.rutrum.magna@condimentumdonecat.org', 'Subscribed', ''),
+(27, 'Gil', 'Gay', 'Ap #543-165 Aliquam St.', '(02) 4611 0511', 'amet.luctus.vulputate@maurisa.com', 'Subscribed', ''),
+(28, 'Emi', 'Dickson', '171-6746 Ligula. Street', '(01) 6774 5257', 'ipsum.primis.in@mattisvelit.net', 'Subscribed', ''),
+(29, 'Alvin', 'Fuller', '3134 Vulputate, Street', '(02) 5217 8423', 'non.lobortis@ornaresagittis.ca', 'Subscribed', ''),
+(30, 'Bethany', 'Baker', '485-3057 Dictum St.', '(05) 3758 8932', 'est.mollis.non@nuncsit.org', 'Unsubscribed', '');
+
+
+
+CREATE TABLE `photo_shoot` (
+  `client_id` int(11) NOT NULL,
+  `photo_shoot_name` varchar(64) NOT NULL,
+  `photo_shoot_description` varchar(64) NOT NULL,
+  `photo_shoot_date` date NOT NULL,
+  `photo_shoot_quote` varchar(64) NOT NULL,
+  `photo_shoot_other_information` varchar(64) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `photo_shoot` (`client_id`, `photo_shoot_name`, `photo_shoot_description`, `photo_shoot_date`, `photo_shoot_quote`, `photo_shoot_other_information`) VALUES
+(8, 'Big Sky Photography Studios', 'Big Sky Photography Studios', '0008-03-10', 'studios', ''),
+(18, 'Box Studio', 'Box Studio', '0018-05-13', 'box', ''),
+(19, 'Capital Photographic', 'Capital Photographic', '0019-05-15', 'capital', ''),
+(11, 'Captured Photography', 'Captured Photography', '0011-04-03', 'captured', ''),
+(17, 'Creative Image Solutions', 'Creative Image Solutions', '0017-05-12', 'creative', ''),
+(5, 'Flawless Images', 'flawless images', '0004-01-04', 'flawless', ''),
+(5, 'Flawless Images', 'flawless images', '0005-02-06', 'flawless', ''),
+(22, 'Full Depiction Place', 'Full Depiction Place', '0022-06-06', 'full', ''),
+(3, 'Mad Crayon Studio', 'mad crayon studio', '0002-01-03', 'studio', ''),
+(1, 'Panoramic Photos', 'panoramic photos', '0000-01-01', 'panoramic', ''),
+(9, 'Photo Gallery', 'Photo Gallery', '0009-03-11', 'gallery', ''),
+(10, 'Photo Gallery', 'Photo Gallery', '0010-04-02', 'gallery', ''),
+(2, 'Photographic Place', 'photographic place', '0001-01-02', 'place', ''),
+(16, 'Photography Courses', 'Photography Courses', '0016-05-01', 'courses', ''),
+(20, 'Retouching Studio', 'Retouching Studio', '0020-05-20', 'retouching', ''),
+(12, 'Shootfactory', 'Shootfactory', '0012-04-16', 'shoot', ''),
+(6, 'Strike A Pose', 'strike a pose', '0006-02-16', 'pose', ''),
+(15, 'Studio Collective', 'Studio Collective', '0015-04-27', 'studio', ''),
+(7, 'The Artsy Lens', 'the artsy lens', '0007-02-17', 'artsy', ''),
+(23, 'The Instant', 'The Instant', '0023-12-25', 'instant', ''),
+(14, 'The Picture House', 'The Picture House', '0014-04-25', 'picture', ''),
+(13, 'Venture Photography', 'Venture Photography', '0013-04-17', 'venture', ''),
+(4, 'Winning Shot Shooters', 'winning shot shooters', '0003-01-04', 'winning', ''),
+(21, 'Younique Look Photography', 'Younique Look Photography', '0021-05-21', 'look', '');
+
+
+CREATE TABLE `product` (
+  `product_name` varchar(100) NOT NULL,
+  `product_upc` int(11) NOT NULL,
+  `product_price` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `product` (`product_name`, `product_upc`, `product_price`, `category_id`) VALUES
+('Zooming photos', 1, 10, 13),
+('Lens Queen Photography', 2, 10, 2),
+('Color Shot Studio', 3, 20, 2),
+('Moonlight photography', 4, 20, 18),
+('Photamora', 5, 35, 3),
+('Pro Photo Connection', 6, 40, 3),
+('Black & White photography', 7, 10, 2),
+('WildLife Photos', 8, 20, 18),
+('Momenta', 9, 12, 4),
+('Open Sky', 10, 22, 10),
+('Splash Work', 11, 22, 17),
+('Click Studio Captures', 12, 88, 8),
+('Unique photos', 13, 75, 10),
+('Creative bells', 14, 56, 16),
+('Page Portrait', 15, 28, 4),
+('Shutter up photography', 16, 25, 8),
+('Mom & Pop PhotoShop', 17, 66, 9),
+('Blossom Exposures', 18, 54, 14),
+('Photo Tatva', 19, 855, 10),
+('Pix Deluxe', 20, 452, 15),
+('Remembering Moments', 21, 345, 16),
+('Moments Remembered', 22, 46, 15),
+('Moments Wedding Pictures', 23, 786, 17);
+
+
+
+CREATE TABLE `product_image` (
+  `product_image_id` int(11) NOT NULL,
+  `product_image_filename` varchar(100) NOT NULL,
+  `product_upc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+INSERT INTO `product_image` (`product_image_id`, `product_image_filename`, `product_upc`) VALUES
+(1, 'product_13_616280ed4c5ee4.73724033.jpg', 13),
+(2, 'product_13_616280ed4c6c64.45583084.jpg', 13),
+(3, 'product_18_6162810550d477.59844603.jpg', 18),
+(4, 'product_18_6162810550dd44.45852929.jpg', 18),
+(5, 'product_19_61628115559df1.28231555.jpg', 19),
+(6, 'product_19_6162811555a463.38817839.jpg', 19),
+(7, 'product_10_616281268d3491.53837432.jpg', 10),
+(8, 'product_10_616281268d3c52.18242675.jpg', 10),
+(9, 'product_11_6162813345dea8.02023837.jpg', 11),
+(10, 'product_11_6162813345ff40.23875942.jpg', 11),
+(11, 'product_21_616281408d2384.01178432.jpg', 21),
+(12, 'product_21_616281409bd305.05632518.jpg', 21),
+(13, 'product_20_6162814aad4823.37368414.jpg', 20),
+(14, 'product_20_6162814aad50c0.04310629.jpg', 20),
+(15, 'product_23_616281669c7306.87864775.jpg', 23),
+(16, 'product_23_616281669c8074.04516976.jpg', 23),
+(17, 'product_15_6162818d635ea0.32675486.jpg', 15),
+(18, 'product_15_6162818d636a48.09043909.jpg', 15),
+(19, 'product_22_616281a65ca730.24826025.jpg', 22),
+(20, 'product_22_616281a65e7584.35654317.jpg', 22),
+(21, 'product_14_616281c6c96ea7.35369013.jpg', 14),
+(22, 'product_14_616281c6ca08a8.15449182.jpg', 14),
+(23, 'product_8_616282103670a5.69935327.jpg', 8),
+(24, 'product_8_61628210367aa9.01372537.jpg', 8),
+(25, 'product_9_61628230949199.56538579.jpg', 9),
+(26, 'product_9_616282309532f0.71725631.jpg', 9),
+(27, 'product_2_6162824c79ba36.86512330.jpg', 2),
+(28, 'product_2_6162824c79dc46.72336708.jpg', 2),
+(29, 'product_3_616282592bfd39.28101310.jpg', 3),
+(30, 'product_3_616282592c9a88.03955435.jpg', 3),
+(31, 'product_5_61628296c83c31.40221429.jpg', 5),
+(32, 'product_5_61628296c85484.47524832.jpg', 5),
+(33, 'product_16_616282aa5a77f5.25234686.jpg', 16),
+(34, 'product_16_616282aa5b0f87.55402107.jpg', 16),
+(35, 'product_12_616282bc1d0778.40662191.jpg', 12),
+(36, 'product_12_616282bc1da2e7.09894380.jpg', 12),
+(37, 'product_17_616282c9507411.62640283.jpg', 17),
+(38, 'product_17_616282c9511d72.60763918.jpg', 17),
+(39, 'product_1_616282e5a8aa97.64923297.jpg', 1),
+(40, 'product_1_616282e5a8b9b4.85816871.jpg', 1),
+(41, 'product_4_6162834764ee80.66324839.jpg', 4),
+(42, 'product_4_6162834764f702.13456305.jpg', 4),
+(43, 'product_7_6162835deb8642.31673671.jpg', 7),
+(44, 'product_7_6162835ded0a49.81273997.jpg', 7),
+(45, 'product_6_616283780ed303.27790092.jpg', 6),
+(46, 'product_6_616283780eec91.57265992.jpg', 6),
+(47, 'product_6_616283781052d1.95119010.jpg', 6);
+
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `email` varchar(64) NOT NULL,
+  `username` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 insert into `user` (`id`,`email`, `username`,`password`) values (1,'dosuaird0@wordpress.org', 'scheng0', SHA2('scheng0',256));
 insert into `user` (`id`,`email`, `username`,`password`) values (2,'asollam1@digg.com', 'wwormell1', SHA2('wwormell1',256));
 insert into `user` (`id`,`email`, `username`,`password`) values (3,'cfowlie2@intel.com', 'rconcklin2', SHA2('rconcklin2',256));
@@ -46,124 +234,44 @@ insert into `user` (`id`,`email`, `username`,`password`) values (23,'mboutwellm@
 insert into `user` (`id`,`email`, `username`,`password`) values (24,'promaninin@edublogs.org', 'jgriern', SHA2('jgriern',256));
 insert into `user` (`id`,`email`, `username`,`password`) values (25,'kleggingo@list-manage.com', 'azimao', SHA2('azimao',256));
 
-CREATE TABLE `client`(
-                         `client_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-                         `client_firstname` varchar(64) NOT NULL,
-                         `client_lastname` varchar(64) NOT NULL,
-                         `client_address` varchar(64) NOT NULL,
-                         `client_phone` varchar(64) NOT NULL,
-                         `client_email` varchar(64) NOT NULL,
-                         `client_subscribed` varchar(64) NOT NULL,
-                         `client_other_information` varchar(64)
-);
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
 
-INSERT INTO `client` (`client_id`, `client_firstname`,`client_lastname`,`client_address`,`client_phone`,`client_email`, `client_subscribed`, `client_other_information`)
-VALUES
-    (1,"Phoebe","Fisher","P.O. Box 636, 2890 Tempus Avenue","(05) 4437 9456","velit.egestas@ipsumphasellus.com", "Subscribed", ""),
-    (2,"Cullen","Puckett","1287 Nunc St.","(08) 0416 9059","vestibulum@venenatislacusetiam.org", "Subscribed",""),
-    (3,"Seth","Vance","Ap #482-1568 Leo. Rd.","(07) 6614 7728","placerat.orci@morbi.ca", "Unsubscribed",""),
-    (4,"Veda","Tillman","467-7955 Cursus. St.","(08) 5734 4351","eu.odio.phasellus@at.net", "Subscribed",""),
-    (5,"Tashya","Brooks","Ap #391-2665 Suspendisse Av.","(08) 3624 3545","augue.scelerisque@diamvelarcu.org","Unsubscribed",""),
-    (6,"Simon","Carter","480-2061 Nibh Street","(08) 3215 1064","donec.sollicitudin@ultricesmaurisipsum.com","Unsubscribed",""),
-    (7,"Genevieve","Mann","748-2097 Nulla Rd.","(02) 1524 3656","nullam.suscipit.est@nullaeget.com","Subscribed",""),
-    (8,"Brent","Martin","912-4635 Molestie St.","(06) 1011 5887","mauris.erat.eget@euturpis.net","Unsubscribed",""),
-    (9,"Lucas","Walter","P.O. Box 168, 3318 Nisi Rd.","(07) 7720 5471","nunc.quis.arcu@acurna.org", "Subscribed",""),
-    (10,"Elvis","Haney","676-5814 Tempus, St.","(02) 3067 1476","integer.vulputate@pharetraquisqueac.edu", "Subscribed",""),
-    (11,"Caesar","Prince","258-3872 Accumsan St.","(05) 2269 1281","pellentesque@dictumsapien.co.uk","Unsubscribed",""),
-    (12,"Erich","York","176-7103 Hendrerit Street","(03) 9303 1808","primis.in@dui.ca", "Subscribed",""),
-    (13,"Urielle","Holmes","867-5059 Faucibus St.","(08) 2757 5594","montes.nascetur@nullamagna.co.uk","Unsubscribed",""),
-    (14,"Kamal","Carney","Ap #783-4988 Fusce Av.","(02) 9952 4264","et.ultrices.posuere@mauris.co.uk", "Subscribed",""),
-    (15,"Sandra","Davis","8227 Nunc, Avenue","(02) 5237 1386","dolor.quisque@miduis.org", "Subscribed",""),
-    (16,"Megan","Golden","Ap #132-139 Sem Street","(09) 6803 1820","ultrices@dolortempus.ca", "Subscribed",""),
-    (17,"Owen","Hopkins","Ap #471-9190 Mauris Street","(05) 5215 8113","id.nunc@integeraliquam.org","Unsubscribed",""),
-    (18,"Audrey","Charles","921-3502 Sodales Avenue","(03) 4479 7940","odio@et.net", "Subscribed",""),
-    (19,"Chandler","Stone","Ap #287-9036 Sociosqu St.","(03) 1144 5733","luctus.et@gravida.co.uk", "Subscribed",""),
-    (20,"Ishmael","Vazquez","Ap #117-9863 Proin St.","(06) 1842 6432","tellus.aenean@quisquevarius.com", "Subscribed",""),
-    (21,"Laurel","Salazar","142-8268 Ante St.","(07) 1687 2429","eu.tempor.erat@suscipitnonummyfusce.org","Unsubscribed",""),
-    (22,"Levi","Strickland","123-7970 Ligula Ave","(09) 2383 0681","maecenas.libero@nunclectuspede.edu","Unsubscribed",""),
-    (23,"Laith","White","588-2672 Donec Av.","(01) 6767 9053","faucibus.ut@magna.ca", "Subscribed",""),
-    (24,"Claire","Lott","560-5663 Metus Rd.","(02) 2325 5584","sem.molestie@donecconsectetuermauris.com","Unsubscribed",""),
-    (25,"Raya","Maynard","460-6788 Arcu. St.","(06) 1484 4280","dapibus.rutrum@egestasligula.edu", "Subscribed",""),
-    (26,"Miriam","Dean","Ap #213-7500 Proin St.","(04) 6575 7494","massa.rutrum.magna@condimentumdonecat.org", "Subscribed",""),
-    (27,"Gil","Gay","Ap #543-165 Aliquam St.","(02) 4611 0511","amet.luctus.vulputate@maurisa.com", "Subscribed",""),
-    (28,"Emi","Dickson","171-6746 Ligula. Street","(01) 6774 5257","ipsum.primis.in@mattisvelit.net", "Subscribed",""),
-    (29,"Alvin","Fuller","3134 Vulputate, Street","(02) 5217 8423","non.lobortis@ornaresagittis.ca", "Subscribed",""),
-    (30,"Bethany","Baker","485-3057 Dictum St.","(05) 3758 8932","est.mollis.non@nuncsit.org", "Unsubscribed","");
-
-CREATE TABLE `photo_shoot`(
-                              `client_id` INT(11) NOT NULL,
-                              `photo_shoot_name` varchar(64) NOT NULL,
-                              `photo_shoot_description` varchar(64) NOT NULL,
-                              `photo_shoot_date` date NOT NULL,
-                              `photo_shoot_quote` varchar(64) NOT NULL,
-                              `photo_shoot_other_information` varchar(64)
-);
+ALTER TABLE `client`
+  ADD PRIMARY KEY (`client_id`);
 
 ALTER TABLE `photo_shoot`
-    ADD PRIMARY KEY (`photo_shoot_name`,`photo_shoot_date`) USING BTREE;
+  ADD PRIMARY KEY (`photo_shoot_name`,`photo_shoot_date`) USING BTREE,
+  ADD KEY `Photo_id_FK` (`client_id`);
+
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`product_upc`),
+  ADD KEY `Prod_Categ_FK` (`category_id`);
+
+ALTER TABLE `product_image`
+  ADD PRIMARY KEY (`product_image_id`),
+  ADD KEY `Image_Prod_FK` (`product_upc`);
+
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+
+ALTER TABLE `client`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+ALTER TABLE `product_image`
+  MODIFY `product_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
 
 ALTER TABLE `photo_shoot`
-    ADD CONSTRAINT `Photo_id_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
+  ADD CONSTRAINT `Photo_id_FK` FOREIGN KEY (`client_id`) REFERENCES `client` (`client_id`);
 
-INSERT INTO `category` (`category_id`,`category_name`) VALUES (1,"Portrait"),(2,"Fashion"),(3,"Sports"),(4,"Editorial"),
-(5,"Architectural"),(6,"Black and White"),(7,"Advertising"),(8,"Still Life"),(9,"Street"),(10,"Adventure"),
-(11,"Astrophotography"),(12,"Business"),(13,"Candid"),(14,"City Scape"),(15,"Commercial"),(16,"Creative"),
-(17,"Documentary"),(18,"Drone");
+ALTER TABLE `product`
+  ADD CONSTRAINT `Prod_Categ_FK` FOREIGN KEY (`category_id`) REFERENCES `category` (`category_id`);
 
-
-INSERT INTO `product` (`product_name`,`product_upc`,`product_price`,`category_id`) VALUES ('Zooming photos', 1, 10, 1),
-('Lens Queen Photography',2 , 10,2 ),('Color Shot Studio', 3,20 ,2 ),('Moonlight photography',4 ,20 ,2 ),
-('Photamora', 5, 35, 3),('Pro Photo Connection', 6,40 ,3 ),('Black & White photography', 7, 10, 3),
-('WildLife Photos', 8,20 ,4 ),('Momenta',9 , 12,4 ),('Open Sky',10 , 22, 5),('Splash Work', 11,22 , 6),
-('Click Studio Captures', 12, 88, 8),('Unique photos',13 ,75 , 10),('Creative bells',14,56 ,16 ),
-('Page Portrait', 15, 28, 15),('Shutter up photography',16 ,25 , 8),('Mom & Pop PhotoShop',17 ,66 ,9 ),
-('Blossom Exposures',18 ,54 , 10),('Photo Tatva', 19, 855, 7),('Pix Deluxe',20 ,452 , 14),
-('Remembering Moments', 21,345 , 12),('Moments Remembered',22 ,46 ,16 ),('Moments Wedding Pictures',23 ,786 ,15 );
-
-INSERT INTO `photo_shoot` (`client_id`,`photo_shoot_name`,`photo_shoot_description`,`photo_shoot_date`,`photo_shoot_quote`,
-`photo_shoot_other_information`) VALUES
-(1,'Panoramic Photos','panoramic photos',DATE '2021-01-01','panoramic',''),
-(2,'Photographic Place','photographic place',DATE '2021-01-02','place',''),
-(3, 'Mad Crayon Studio','mad crayon studio',DATE '2021-01-03','studio',''),
-(4, 'Winning Shot Shooters','winning shot shooters',DATE '2021-01-04', 'winning',''),
-(5, 'Flawless Images','flawless images',DATE '2021-01-04','flawless',''),
-(5, 'Flawless Images','flawless images',DATE '2021-02-06','flawless',''),
-(6, 'Strike A Pose','strike a pose',DATE '2021-02-16','pose',''),
-(7, 'The Artsy Lens', 'the artsy lens', DATE '2021-02-17','artsy',''),
-(8, 'Big Sky Photography Studios','Big Sky Photography Studios',DATE '2021-03-10','studios',''),
-(9, 'Photo Gallery','Photo Gallery',DATE '2021-03-11','gallery',''),
-(10, 'Photo Gallery','Photo Gallery',DATE '2021-04-02','gallery',''),
-(11,'Captured Photography','Captured Photography',DATE '2021-04-03','captured',''),
-(12,'Shootfactory','Shootfactory',DATE '2021-04-16', 'shoot',''),
-(13,'Venture Photography','Venture Photography',DATE '2021-04-17','venture',''),
-(14,'The Picture House','The Picture House',DATE '2021-04-25','picture',''),
-(15,'Studio Collective','Studio Collective',DATE '2021-04-27','studio',''),
-(16,'Photography Courses','Photography Courses',DATE '2021-05-01','courses',''),
-(17,'Creative Image Solutions','Creative Image Solutions',DATE '2021-05-12', 'creative',''),
-(18, 'Box Studio','Box Studio',DATE '2021-05-13', 'box',''),
-(19,'Capital Photographic','Capital Photographic',DATE '2021-05-15','capital',''),
-(20,'Retouching Studio','Retouching Studio',DATE '2021-05-20','retouching',''),
-(21, 'Younique Look Photography','Younique Look Photography',DATE '2021-05-21','look',''),
-(22,'Full Depiction Place','Full Depiction Place',DATE '2021-06-06','full',''),
-(23,'The Instant','The Instant',DATE '2021-12-25','instant','');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ALTER TABLE `product_image`
+  ADD CONSTRAINT `Image_Prod_FK` FOREIGN KEY (`product_upc`) REFERENCES `product` (`product_upc`);
 
