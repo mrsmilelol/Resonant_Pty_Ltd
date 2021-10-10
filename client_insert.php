@@ -5,7 +5,7 @@ ob_start();
 $dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 require("header.php");
 ?>
-<body>
+<body xmlns="http://www.w3.org/1999/html">
 <h3 class="mx-sm-3">Add new client</h3>
 <?php
 if(!empty($_POST)){
@@ -59,7 +59,7 @@ if(!empty($_POST)){
                         </div>
                         <div class="row" >
                             <label for="client_other_information" class="mx-sm-3">Client Other Information</label>
-                            <textarea type="text" id="client_other_information" class="form-control-sm mx-sm-4 mb-2 w-25" value="<?= $record->client_other_information ?>"></textarea>
+                            <input type="text" id="client_other_information" class="form-control-sm mx-sm-4 mb-2 w-25" readonly value="<?= $record->client_other_information ?>"/>
                         </div>
                     </div>
                 </form>
