@@ -1,14 +1,12 @@
 </div>
-<footer class="card-footer fixed-bottom float-start w-100">
-    <div class="container my-auto">
-        <div class="copyright my-auto">
-            <a href="display_product_code.php" target="_blank">Product</a>
-            <a href="display_client_code.php" target="_blank">Client</a>
-            <a href="display_category_code.php" target="_blank">Category</a>
-            <a href="display_photoshoot_code.php" target="_blank">Photo Shoot</a>
-            <a href="display_multiple_product_code.php" target="_blank">Multiple Products</a>
-        </div>
-    </div>
+<footer class="py-3 my-4">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a href="display_product_code.php" target="_blank" class="nav-link px-2 text-muted">Product</a></li>
+            <li class="nav-item"><a href="display_client_code.php" target="_blank" class="nav-link px-2 text-muted">Client</a></li>
+            <li class="nav-item"><a href="display_category_code.php" target="_blank" class="nav-link px-2 text-muted">Category</a></li>
+            <li class="nav-item"><a href="display_photoshoot_code.php" target="_blank" class="nav-link px-2 text-muted">Photo</a></li>
+            <li class="nav-item"><a href="display_multiple_product_code.php" target="_blank" class="nav-link px-2 text-muted">Products</a></li>
+        </ul>
 </footer>
 </div>
 </div>
