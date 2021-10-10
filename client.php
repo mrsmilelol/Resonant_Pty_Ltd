@@ -49,3 +49,4 @@ if ($stmt->execute()): ?>
     die(friendlyError($stmt->errorInfo()[2]));
 endif; ?>
 <?php require("footer.php")?>
+</body>
