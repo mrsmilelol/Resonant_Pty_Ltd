@@ -2,7 +2,7 @@
 $PAGE_ID = "email";
 $PAGE_HEADER = "Sending email to users";
 
-include("connection.php");
+$dbh = new PDO('mysql:host=localhost;dbname=fit2104_ass2','fit2104','fit2104');
 /** @var PDO $dbh Database connection */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

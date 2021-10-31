@@ -16,7 +16,7 @@ if(isset($_POST['submit'])){
     $query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id = category.category_id WHERE product_upc LIKE '%".$search."%' ORDER BY category_name;";
 }
 else{
-    $query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id = category.category_id ORDER BY category_name;";
+    $query = "SELECT * FROM `product` INNER JOIN `category` ON product.category_id = category.category_id ORDER BY product_upc;";
 }
 $stmt = $dbh->prepare($query);
 if ($stmt->execute()): ?>

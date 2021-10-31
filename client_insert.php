@@ -9,7 +9,7 @@ require("header.php");
 <h3 class="mx-sm-3">Add new client</h3>
 <?php
 if(!empty($_POST)){
-    $query = "INSERT INTO client (client_firstname, client_lastname, client_address,`client_phone`,`client_email`, client_subscribed, client_other_information) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $query = "INSERT INTO `client` (client_firstname, client_lastname, client_address,`client_phone`,`client_email`, client_subscribed, client_other_information) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = $dbh->prepare($query);
     $parameters = [
         $_POST['client_firstname'],
@@ -21,7 +21,7 @@ if(!empty($_POST)){
         $_POST['client_other_information']];
     if ($stmt->execute($parameters)) {
         $newRecordId = $dbh->lastInsertId();
-        $query = "SELECT * FROM client WHERE `client_id`=?";
+        $query = "SELECT * FROM `client` WHERE `client_id`=?";
         $stmt = $dbh->prepare($query);
         if ($stmt->execute([$newRecordId])) {
             if ($stmt->rowCount() > 0) {
